@@ -16,10 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.user.CreatePassword"
+            android:exported="false" />
+        <activity
             android:name=".ui.user.UserDashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.user.RegistrationActivity"
+            android:name=".ui.user.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.user.LoginActivity"

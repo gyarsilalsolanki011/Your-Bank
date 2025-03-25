@@ -3,6 +3,8 @@ package com.gyarsilalsolanki011.bankingapp.ui.user;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,16 +34,28 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.loginButton.setOnClickListener(v -> loginUser());
+
+        binding.createAccountTextButton.setOnClickListener(v -> registerUser());
     }
 
+    //Register User Navigation
+    private void registerUser() {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    // Login User Method
     private void loginUser() {
         String email = Objects.requireNonNull(binding.emailInput.getText()).toString().trim();
         String password = Objects.requireNonNull(binding.passwordInput.getText()).toString().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter credentials!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(LoginActivity.this, "Email is required", Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(password)){
+            Toast.makeText(LoginActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
+        }else{
 
         ApiService apiService = RetrofitClient.getInstance().getApi();
         Call<LoginResponse> call = apiService.loginUser(email, password);
@@ -68,15 +82,15 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
-                // Hide Progress Bar and Enable Login Button
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable throwable) {
                 binding.loginProgressIndicator.setVisibility(View.GONE);
                 binding.loginButton.setEnabled(true);
-
                 Toast.makeText(LoginActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
             }
         });
     }
+        }
 
     private void saveToken(String token) {
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
