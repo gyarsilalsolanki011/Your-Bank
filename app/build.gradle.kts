@@ -25,6 +25,11 @@ android {
             )
         }
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -40,4 +45,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // Retrofit Core Library
+    implementation(libs.retrofit);
+
+    // GSON Converter for JSON Parsing
+    implementation(libs.json.converter)
+
+    // OkHttp for Logging Network Requests (Optional but Recommended)
+    implementation(libs.logging.interceptor)
 }

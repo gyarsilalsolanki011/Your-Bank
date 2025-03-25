@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.SplashActivity"
     android:id="@+id/splashActivity"
-    android:background="@color/light_blue"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/splashProgressBar"
+        android:id="@+id/splashProgressIndicator"
         android:indeterminate="true" />
 
 </LinearLayout>

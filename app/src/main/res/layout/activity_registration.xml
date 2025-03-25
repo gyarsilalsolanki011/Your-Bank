@@ -2,72 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.user.RegistrationActivity"
     android:background="@drawable/background"
+    android:id="@+id/registrationActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.LoginActivity"
-    android:id="@+id/loginActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp" >
+    android:padding="24dp">
 
-    <!-- App Logo -->
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/bank_image"
-        android:layout_gravity="center"
-        android:contentDescription="@string/image"
-        android:layout_marginBottom="20dp"/>
-
-    <!-- Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/admin_login"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:text="@string/userInformation"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
-    <!-- Email Input -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userNameInput"
+            android:layout_width="match_parent"
+            android:hint="@string/userName"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:hint="@string/email"
-            android:textColor="@color/white"
             android:inputType="textEmailAddress"
-            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="24dp"
         android:layout_width="match_parent"
-        app:passwordToggleEnabled="true"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordInput"
-            android:inputType="textPassword"
+            android:id="@+id/phoneNumberInput"
             android:layout_width="match_parent"
-            android:hint="@string/password"
+            android:hint="@string/phone"
+            android:inputType="textAutoComplete"
             android:textColor="@color/white"
-            android:textColorHint="@color/gray"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addressInput"
+            android:layout_width="match_parent"
+            android:hint="@string/address"
+            android:inputType="textAutoComplete"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="@color/primary"
@@ -76,21 +86,20 @@
 
     <!-- Progress Bar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/loginProgressIndicator"
+        android:id="@+id/registerProgressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:indeterminate="true"
         android:layout_marginTop="20dp" />
 
-    <!-- Text Button(Create Account) -->
     <TextView
-        android:id="@+id/createAccountTextButton"
+        android:id="@+id/alreadyAccountTextButton"
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/light_blue"
-        android:text="@string/don_t_have_an_account_create_one"
+        android:text="@string/already_have_an_account_login"
         android:clickable="true"
         android:focusable="true" />
 
