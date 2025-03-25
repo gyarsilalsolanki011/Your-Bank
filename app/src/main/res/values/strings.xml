@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Your Bank</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="admin_login">User Login</string>
+    <string name="image">Its an Image</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="don_t_have_an_account_create_one">Don\'t have an account? Create one!</string>
+    <string name="already_have_an_account_login">Already have an account? Login!</string>
+</resources>
