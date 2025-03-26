@@ -74,7 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         String status = response.body().getStatus();
                         Toast.makeText(RegisterActivity.this, status, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, CreatePassword.class).putExtra("email", email));
+                        Intent intent = new Intent(RegisterActivity.this, CreatePassword.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
                         finish();
                     }
                 }

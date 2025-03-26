@@ -22,7 +22,7 @@ public interface ApiService {
            @Query("address") String address
     );
 
-    @POST("/api/auth/login")
+    @POST("/api/auth/request-online-banking")
     Call<StringResponse> cratePassword(
             @Query("email") String email,
             @Query("bankingPassword") String password
