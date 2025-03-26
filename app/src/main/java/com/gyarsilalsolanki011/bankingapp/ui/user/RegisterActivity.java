@@ -11,7 +11,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gyarsilalsolanki011.bankingapp.core.api.ApiService;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivityRegisterBinding;
@@ -58,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(address)){
             Toast.makeText(RegisterActivity.this, "Address is required", Toast.LENGTH_SHORT).show();
         } else {
-            ApiService apiService = RetrofitClient.getInstance().getApi();
-            Call<StringResponse>  call = apiService.registerUser(name, email, phone, address);
+            AuthApiService authApiService = RetrofitClient.getInstance().getAuthApiService();
+            Call<StringResponse>  call = authApiService.registerUser(name, email, phone, address);
 
             // Show Progress Bar and Disable Login Button
             binding.registerProgressIndicator.setVisibility(View.VISIBLE);

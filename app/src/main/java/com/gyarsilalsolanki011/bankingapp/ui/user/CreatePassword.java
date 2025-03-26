@@ -11,7 +11,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gyarsilalsolanki011.bankingapp.core.api.ApiService;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
 import com.gyarsilalsolanki011.bankingapp.databinding.CreatePasswordBinding;
@@ -50,8 +50,8 @@ public class CreatePassword extends AppCompatActivity {
             Toast.makeText(CreatePassword.this, "Password is required", Toast.LENGTH_SHORT).show();
         } else {
             if (password.equals(passwordConfirm)){
-                ApiService apiService = RetrofitClient.getInstance().getApi();
-                Call<StringResponse> call = apiService.cratePassword(email, password);
+                AuthApiService authApiService = RetrofitClient.getInstance().getAuthApiService();
+                Call<StringResponse> call = authApiService.cratePassword(email, password);
 
                 // Show Progress Bar and Disable Login Button
                 binding.createProgressIndicator.setVisibility(View.VISIBLE);

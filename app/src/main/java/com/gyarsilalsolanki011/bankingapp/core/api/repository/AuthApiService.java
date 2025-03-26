@@ -1,4 +1,4 @@
-package com.gyarsilalsolanki011.bankingapp.core.api;
+package com.gyarsilalsolanki011.bankingapp.core.api.repository;
 
 import com.gyarsilalsolanki011.bankingapp.core.models.LoginResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-public interface ApiService {
+public interface AuthApiService {
     @POST("/api/auth/login")
     Call<LoginResponse> loginUser(
             @Query("email") String email,

@@ -12,7 +12,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gyarsilalsolanki011.bankingapp.core.api.ApiService;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.models.LoginResponse;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivityLoginBinding;
@@ -57,8 +57,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
         }else{
 
-        ApiService apiService = RetrofitClient.getInstance().getApi();
-        Call<LoginResponse> call = apiService.loginUser(email, password);
+        AuthApiService authApiService = RetrofitClient.getInstance().getAuthApiService();
+        Call<LoginResponse> call = authApiService.loginUser(email, password);
 
         // Show Progress Bar and Disable Login Button
         binding.loginProgressIndicator.setVisibility(View.VISIBLE);
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveToken(String token) {
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("JWT_TOKEN", token);
+        editor.putString("JWT_TOKEN", "Bearer " + token);
         editor.apply();
     }
 }
