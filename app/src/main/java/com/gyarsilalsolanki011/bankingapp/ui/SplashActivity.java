@@ -2,19 +2,18 @@ package com.gyarsilalsolanki011.bankingapp.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.TokenManager;
 import com.gyarsilalsolanki011.bankingapp.ui.user.LoginActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.user.UserDashboardActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onStart() {
@@ -32,17 +31,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkLoginStatus() {
-        Intent intent;
-        if (isUserLoggedIn()){
-            intent = new Intent(SplashActivity.this, UserDashboardActivity.class);
+        if (TokenManager.isUserLoggedIn(this)){
+            // User is logged in, go to Dashboard
+            startActivity(new Intent(this, UserDashboardActivity.class));
+            finish();
         } else {
-            intent = new Intent(SplashActivity.this, LoginActivity.class);
+            // User is not logged in, go to Login
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
-        startActivity(intent);
-        finish();
-    }
-
-    private boolean isUserLoggedIn() {
-        return false;
     }
 }
