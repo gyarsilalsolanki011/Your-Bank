@@ -1,16 +1,16 @@
-package com.gyarsilalsolanki011.bankingapp.ui;
+package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.TokenManager;
-import com.gyarsilalsolanki011.bankingapp.ui.user.LoginActivity;
-import com.gyarsilalsolanki011.bankingapp.ui.user.UserDashboardActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
@@ -27,18 +27,18 @@ public class SplashActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
-        checkLoginStatus();
+        //Set animation for SplashActivity
+
     }
 
     private void checkLoginStatus() {
-        if (TokenManager.isUserLoggedIn(this)){
-            // User is logged in, go to Dashboard
-            startActivity(new Intent(this, UserDashboardActivity.class));
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (TokenManager.isUserLoggedIn(this)) {
+                startActivity(new Intent(SplashActivity.this, UserDashboardActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            }
             finish();
-        } else {
-            // User is not logged in, go to Login
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }
+        }, 200);
     }
 }

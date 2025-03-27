@@ -5,7 +5,7 @@
     android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SplashActivity"
+    tools:context=".ui.activities.SplashActivity"
     android:id="@+id/splashActivity"
     android:orientation="vertical"
     android:gravity="center">
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:textColor="@color/yellow"
+        android:textColor="@color/light_green"
         android:id="@+id/welcomeText"
         android:textSize="24sp"
         android:textStyle="bold"

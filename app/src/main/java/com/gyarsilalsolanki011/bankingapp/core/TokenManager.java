@@ -30,7 +30,7 @@ public class TokenManager {
 
     // Method to get saved token
     public static String getSavedToken(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString("JWT_TOKEN", null);
     }
 
@@ -42,7 +42,7 @@ public class TokenManager {
 
     // Method to log out user
     public static void logoutUser(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("JWT_TOKEN");
         editor.apply();

@@ -1,4 +1,4 @@
-package com.gyarsilalsolanki011.bankingapp.ui.user;
+package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

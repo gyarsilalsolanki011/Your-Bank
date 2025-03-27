@@ -5,7 +5,7 @@
     <string name="email">User Email</string>
     <string name="admin_login">User Login</string>
     <string name="image">Its an Image</string>
-    <string name="welcome_back">Welcome Back!</string>
+    <string name="welcome_back">Welcome to Your Bank!</string>
     <string name="don_t_have_an_account_create_one">Don\'t have an account? Create one!</string>
     <string name="already_have_an_account_login">Already have an account? Login!</string>
     <string name="userInformation">User Information</string>
@@ -14,5 +14,18 @@
     <string name="address">Address</string>
     <string name="register">Register</string>
     <string name="create_password">Create Password</string>
-    <string name="confirm_password">Comfirm Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="home">Home</string>
+    <string name="services">Services</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="settings">Setting</string>
+    <string name="notifications">Notifications</string>
+    <string name="nav_open">Open Navigation</string>
+    <string name="nav_close">Close Navigation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
 </resources>
