@@ -18,4 +18,7 @@
     <color name="search_hint">#A7A7A7</color> <!-- Hint Text -->
     <color name="search_text">#FFFFFF</color> <!-- Search Text -->
     <color name="nav_icon_color">#FFFFFF</color> <!-- White Icons -->
+    <color name="background_color">#121212</color>
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textSecondary">#B0B0B0</color>
 </resources>

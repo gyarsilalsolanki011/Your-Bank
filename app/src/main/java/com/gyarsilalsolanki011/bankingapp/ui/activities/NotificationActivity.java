@@ -6,18 +6,19 @@ import android.view.MenuItem;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.gyarsilalsolanki011.bankingapp.R;
-import com.gyarsilalsolanki011.bankingapp.databinding.ActivityAboutUsBinding;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivityNotificationBinding;
+import com.gyarsilalsolanki011.bankingapp.ui.adapters.NotificationAdapter;
+import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class NotificationActivity extends AppCompatActivity {
     private ActivityNotificationBinding binding;
+    List<NotificationModel> notificationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,29 @@ public class NotificationActivity extends AppCompatActivity {
 
         // Initialize Toolbar
         setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(v -> finish());
 
         // Enable Back Button
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Notifications");
+
+        // Initialize RecyclerView
+        binding.recyclerViewNotifications.setLayoutManager(new LinearLayoutManager(this));
+
+        //Initialise Notifications
+        notificationList = new ArrayList<>();
+        notificationList.add(new NotificationModel("Transaction Successful", "You received ₹10,000.", "2 min ago"));
+        notificationList.add(new NotificationModel("New Offer", "Get 5% cashback on bill payments.", "1 hr ago"));
+        notificationList.add(new NotificationModel("Security Alert", "New login from an unknown device.", "5 hrs ago"));
+
+        // Set Adapter
+        NotificationAdapter adapter = new NotificationAdapter(notificationList);
+        binding.recyclerViewNotifications.setAdapter(adapter);
+    }
+
+    //Call this method to add transaction notification
+    public void sendTransactionNotifications(NotificationModel notification){
+        notificationList.add(0, notification);
     }
 
     @Override
