@@ -1,14 +1,43 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.YourBank" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:colorBackground">@color/white</item>
-        <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:colorBackground">@color/primary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:navigationBarColor">@color/primary</item>
     </style>
 
     <style name="Theme.YourBank" parent="Base.Theme.YourBank" />
+    <style name="Theme.Activity" parent="Theme.YourBank">
+        <item name="android:background">@drawable/background</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    
     <style name="Theme.SearchView" parent="Theme.YourBank">
         <item name="android:textColorHint">#E3DADA</item>
         <item name="android:editTextColor">#C6C1C1</item>
+    </style>
+
+    <style name="Theme.Text.Primary" parent="Theme.YourBank">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Text.Secondary" parent="Theme.YourBank">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Text.Bold" parent="Theme.YourBank">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Text.EditText" parent="Theme.YourBank">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

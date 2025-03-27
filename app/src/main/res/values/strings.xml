@@ -31,4 +31,21 @@
     <string name="app_motto">Your Trusted Financial Partner</string>
     <string name="app_logo_desc">Banking App Logo</string>
     <string name="menu_icon">Menu Icon</string>
+    <string name="aboutUs">Your Bank is a modern and secure digital banking platform that ensures seamless and safe financial transactions. With innovative banking solutions, we help you manage your finances efficiently anytime, anywhere.</string>
+    <string name="bank_mission">🔹 Our Mission\nTo provide secure, user-friendly, and innovative banking solutions that empower individuals and businesses to manage their finances with confidence.</string>
+    <string name="bank_vision">🔹 Our Vision\nTo become the leading digital banking platform, ensuring financial accessibility and security for everyone.</string>
+    <string name="bank_assurance">🔹 Security First\nYour Bank follows the highest security standards with end-to-end encryption, ensuring your financial data is safe and protected at all times.</string>
+    <string name="contactUs">📞 Contact Us\nEmail: support@yourbank.com\nPhone: +123 456 7890</string>
+    <string name="thanks">Thank You for Visiting\nwith warm regards,\n Your Bank Team</string>
+    <string name="send_message">Send Message</string>
+    <string name="contact_address">📍Address</string>
+    <string name="contactAddress">Your Bank, 123 Financial Street,\nDist - Khandwa, Madhya Pradesh</string>
+    <string name="contact_email">📩 Email</string>
+    <string name="contactEmail">support@yourbank.com</string>
+    <string name="contact_phone">📞 Phone</string>
+    <string name="contactPhone">+91 7620824421</string>
+    <string name="follow_us">🔗 Follow Us</string>
+    <string name="type_your_message">Type your message…</string>
+    <string name="john_doe">John Doe</string>
+    <string name="tv_user_email">johndoe@email.com</string>
 </resources>
