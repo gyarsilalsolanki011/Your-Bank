@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected Color (Constant Like Google Drive) -->
+    <item android:color="#BB86FC" android:state_checked="true"/>
+    <!-- Unselected Color -->
+    <item android:color="#B0B3B8"/>
+</selector>

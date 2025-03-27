@@ -30,4 +30,5 @@
     <string name="logout">Logout</string>
     <string name="app_motto">Your Trusted Financial Partner</string>
     <string name="app_logo_desc">Banking App Logo</string>
+    <string name="menu_icon">Menu Icon</string>
 </resources>

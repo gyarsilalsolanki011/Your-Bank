@@ -7,7 +7,15 @@
     <color name="light_green">#0F816E</color>
     <color name="light_gray">#F5F5F5</color>
     <color name="light_blue">#2196F3</color>
-    <color name="nav_background">#00796B</color> <!-- Custom Background -->
-    <color name="nav_icon_color">#043C37</color> <!-- Icon Color -->
-    <color name="nav_text_color">#FFFFFF</color> <!-- Text Color -->
+    <color name="bottom_nav_dark">#292A2D</color> <!-- Dark Grey -->
+    <color name="nav_selected">#BB86FC</color> <!-- Light Purple (Accent) -->
+    <color name="nav_unselected">#B0B3B8</color> <!-- Greyish -->
+    <color name="dark_background">#202124</color> <!-- Dark Grey -->
+    <color name="dark_surface">#292A2D</color> <!-- Slightly Lighter Grey -->
+    <color name="text_primary">#E8EAED</color> <!-- Light Text -->
+    <color name="text_secondary">#B0B3B8</color> <!-- Secondary Text -->
+    <color name="search_bg">#2C2C2C</color> <!-- Dark Gray Oval Search BG -->
+    <color name="search_hint">#A7A7A7</color> <!-- Hint Text -->
+    <color name="search_text">#FFFFFF</color> <!-- Search Text -->
+    <color name="nav_icon_color">#FFFFFF</color> <!-- White Icons -->
 </resources>
