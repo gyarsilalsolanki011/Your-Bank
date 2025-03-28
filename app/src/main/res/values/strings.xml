@@ -54,4 +54,9 @@
     <string name="online_banking_status">Online Banking Status</string>
     <string name="active">Active</string>
     <string name="savings_current">Savings, Current</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="rupees">₹5000</string>
+    <string name="deposit">Deposit</string>
+    <string name="date">25 Mar 2025</string>
+    <string name="success">Success</string>
 </resources>
