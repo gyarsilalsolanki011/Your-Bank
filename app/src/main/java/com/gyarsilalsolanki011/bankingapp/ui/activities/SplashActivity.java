@@ -10,7 +10,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyarsilalsolanki011.bankingapp.R;
-import com.gyarsilalsolanki011.bankingapp.core.TokenManager;
+import com.gyarsilalsolanki011.bankingapp.core.utils.TokenManager;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {

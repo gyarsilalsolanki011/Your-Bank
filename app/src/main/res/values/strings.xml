@@ -46,6 +46,12 @@
     <string name="contactPhone">+91 7620824421</string>
     <string name="follow_us">🔗 Follow Us</string>
     <string name="type_your_message">Type your message…</string>
-    <string name="john_doe">John Doe</string>
-    <string name="tv_user_email">johndoe@email.com</string>
+    <string name="user_tiger">Tiger Das</string>
+    <string name="user_email">tiger@yahu.in</string>
+    <string name="profile_address">123 Main Street, Jabalpur, India</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="total_account">Number of Accounts</string>
+    <string name="online_banking_status">Online Banking Status</string>
+    <string name="active">Active</string>
+    <string name="savings_current">Savings, Current</string>
 </resources>

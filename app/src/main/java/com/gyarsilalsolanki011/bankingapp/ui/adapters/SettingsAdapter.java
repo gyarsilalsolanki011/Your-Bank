@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
-import com.gyarsilalsolanki011.bankingapp.core.TokenManager;
+import com.gyarsilalsolanki011.bankingapp.core.utils.TokenManager;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.LoginActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.models.SettingsItem;

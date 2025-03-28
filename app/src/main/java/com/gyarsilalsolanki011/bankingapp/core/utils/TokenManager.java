@@ -1,4 +1,4 @@
-package com.gyarsilalsolanki011.bankingapp.core;
+package com.gyarsilalsolanki011.bankingapp.core.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
