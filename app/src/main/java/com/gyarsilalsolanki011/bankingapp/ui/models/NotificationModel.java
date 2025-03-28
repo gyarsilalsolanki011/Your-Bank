@@ -1,9 +1,9 @@
 package com.gyarsilalsolanki011.bankingapp.ui.models;
 
 public class NotificationModel {
-    private String title;
-    private String message;
-    private String time;
+    private final String title;
+    private final String message;
+    private final String time;
 
     public NotificationModel(String title, String message, String time) {
         this.title = title;

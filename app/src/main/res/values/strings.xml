@@ -5,7 +5,7 @@
     <string name="email">User Email</string>
     <string name="admin_login">User Login</string>
     <string name="image">Its an Image</string>
-    <string name="welcome_back">Welcome to Your Bank!</string>
+    <string name="welcome_back">Welcome Back!</string>
     <string name="don_t_have_an_account_create_one">Don\'t have an account? Create one!</string>
     <string name="already_have_an_account_login">Already have an account? Login!</string>
     <string name="userInformation">User Information</string>
@@ -55,8 +55,16 @@
     <string name="active">Active</string>
     <string name="savings_current">Savings, Current</string>
     <string name="transaction_history">Transaction History</string>
-    <string name="rupees">₹5000</string>
+    <string name="rupees">₹****</string>
     <string name="deposit">Deposit</string>
     <string name="date">25 Mar 2025</string>
     <string name="success">Success</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="hello_tiger">Hello tiger</string>
+    <string name="accountType">SAVINGS</string>
+    <string name="account_number">Account Number</string>
+    <string name="account_digit">************5065</string>
+    <string name="account_type">Account Type</string>
+    <string name="account_balance">Account Balance</string>
 </resources>

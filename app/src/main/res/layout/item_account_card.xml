@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/card_bg"
+    android:padding="16dp"
+    android:elevation="4dp">
+
+    <!-- Account Number -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_number"
+        android:textColor="@color/gray"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tvAccountNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_digit"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginVertical="8dp"/>
+
+    <!-- Account Type -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_type"
+        android:textColor="@color/gray"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tvAccountType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accountType"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginVertical="8dp"/>
+
+    <!-- Balance and Eye Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+
+        <!-- Amount Balance -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/account_balance"
+                android:textColor="@color/gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rupees"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <!-- Eye Toggle Icon -->
+        <ImageView
+            android:id="@+id/eyeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_eye_closed"
+            android:layout_marginStart="8dp"
+            app:tint="@color/white"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+</LinearLayout>

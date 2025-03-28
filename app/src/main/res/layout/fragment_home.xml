@@ -1,14 +1,130 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".ui.fragments.HomeFragment"
+    android:background="@color/dark_background">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Profile Layout (Profile Image + Welcome Message) -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_bg"
+        android:padding="5dp" >
 
-</FrameLayout>
+        <!-- Profile Image (Left) -->
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_profile_image"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Welcome Message -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/profileImage"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp"
+            tools:ignore="RelativeOverlap">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_tiger"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"/>
+
+            <TextView
+                android:id="@+id/tvWelcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/welcome_back"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <!-- Notification Icon (Right) -->
+        <ImageView
+            android:id="@+id/notificationIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="@string/image"
+            app:tint="@color/white"
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_notifications"/>
+    </RelativeLayout>
+
+    <!-- ViewPager for Account Details -->
+    <!--<androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerAccounts"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:overScrollMode="never"/>-->
+
+    <!-- Dots Indicator -->
+
+
+    <!-- Deposit & Withdraw Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="16dp">
+
+        <Button
+            android:id="@+id/btnDeposit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/deposit"
+            android:backgroundTint="@color/deposit_color"
+            android:textColor="@color/white"/>
+
+        <View android:layout_width="16dp" android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btnWithdraw"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/withdraw"
+            android:backgroundTint="@color/withdraw_color"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <!-- Recent Transaction History -->
+    <TextView
+        android:id="@+id/tv_recent_transactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recent_transactions"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:paddingTop="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"/>
+
+</LinearLayout>
+
