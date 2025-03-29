@@ -111,6 +111,8 @@ public class UserDashboardActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, fragment).commit();
     }
 
+
+    // Search action implemented
     private void setupSearch() {
         searchView.setQueryHint("Search here...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

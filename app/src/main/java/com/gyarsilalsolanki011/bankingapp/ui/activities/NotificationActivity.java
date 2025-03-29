@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivityNotificationBinding;
 import com.gyarsilalsolanki011.bankingapp.ui.adapters.NotificationAdapter;
 import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
@@ -22,7 +23,6 @@ import java.util.Objects;
 
 public class NotificationActivity extends AppCompatActivity {
     private ActivityNotificationBinding binding;
-    List<NotificationModel> notificationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +47,7 @@ public class NotificationActivity extends AppCompatActivity {
         binding.recyclerViewNotifications.setLayoutManager(new LinearLayoutManager(this));
 
         //Initialise Notifications
-        notificationList = new ArrayList<>();
-        notificationList.add(new NotificationModel("Transaction Successful", "You received ₹10,000.", "2 min ago"));
-        notificationList.add(new NotificationModel("New Offer", "Get 5% cashback on bill payments.", "1 hr ago"));
-        notificationList.add(new NotificationModel("Security Alert", "New login from an unknown device.", "5 hrs ago"));
+         List<NotificationModel> notificationList = AppSharedPreferenceManager.getInstance(this).getNotificationList();
 
         // Set Adapter
         NotificationAdapter adapter = new NotificationAdapter(notificationList);
@@ -59,7 +56,9 @@ public class NotificationActivity extends AppCompatActivity {
 
     //Call this method to add transaction notification
     public void sendTransactionNotifications(NotificationModel notification){
-        notificationList.add(0, notification);
+        List<NotificationModel> notifications = new ArrayList<>();
+        notifications.add(0, notification);
+        AppSharedPreferenceManager.getInstance(this).saveNotificationList(notifications);
     }
 
     @Override

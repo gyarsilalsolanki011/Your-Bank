@@ -32,6 +32,17 @@ public class UserSharedPreferencesManager {
         editor.apply();
     }
 
+    // 🔹 Set UserAccounts Data
+    public void setUserAccounts(String account){
+        String accounts = sharedPreferences.getString("user_accounts", "Not Available");
+        if (accounts.equals("Not Available")) {
+            editor.putString("user_accounts", account);
+        } else {
+            editor.putString("user_accounts", accounts+","+account);
+        }
+
+    }
+
     // 🔹 Get User Data
     public String getUserName() {
         return sharedPreferences.getString("user_name", "User Name");
@@ -50,7 +61,7 @@ public class UserSharedPreferencesManager {
     }
 
     public String getUserAccounts() {
-        return sharedPreferences.getString("user_accounts", "Not Available");
+        return sharedPreferences.getString("user_accounts", "Not Available, Create One");
     }
 
     public String getUserAddress() {

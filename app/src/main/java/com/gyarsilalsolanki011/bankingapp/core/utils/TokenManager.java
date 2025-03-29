@@ -1,7 +1,6 @@
 package com.gyarsilalsolanki011.bankingapp.core.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Base64;
 import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
@@ -30,8 +29,7 @@ public class TokenManager {
 
     // Method to get saved token
     public static String getSavedToken(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("JWT_TOKEN", null);
+        return AppSharedPreferenceManager.getInstance(context).getJwtToken();
     }
 
     // Method to check if user is logged in
@@ -42,10 +40,7 @@ public class TokenManager {
 
     // Method to log out user
     public static void logoutUser(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove("JWT_TOKEN");
-        editor.apply();
+        AppSharedPreferenceManager.getInstance(context).clearJwtToken();
     }
 
 }

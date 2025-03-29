@@ -14,7 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.UserApiService;
+import com.gyarsilalsolanki011.bankingapp.core.enums.OnlineBankingStatus;
 import com.gyarsilalsolanki011.bankingapp.core.models.LoginResponse;
+import com.gyarsilalsolanki011.bankingapp.core.models.UserResponse;
+import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
+import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivityLoginBinding;
 
 import java.util.Objects;
@@ -57,45 +62,77 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
         }else{
 
-        AuthApiService authApiService = RetrofitClient.getInstance().getAuthApiService();
-        Call<LoginResponse> call = authApiService.loginUser(email, password);
+            AuthApiService authApiService = RetrofitClient.getInstance().getAuthApiService();
+            Call<LoginResponse> call = authApiService.loginUser(email, password);
 
-        // Show Progress Bar and Disable Login Button
-        binding.loginProgressIndicator.setVisibility(View.VISIBLE);
-        binding.loginButton.setEnabled(false);
+            // Show Progress Bar and Disable Login Button
+            binding.loginProgressIndicator.setVisibility(View.VISIBLE);
+            binding.loginButton.setEnabled(false);
 
-        call.enqueue(new Callback<LoginResponse>() {
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+                    // Hide Progress Bar and Enable Login Button
+                    binding.loginProgressIndicator.setVisibility(View.GONE);
+                    binding.loginButton.setEnabled(true);
+
+                    if (response.isSuccessful() && response.body() != null) {
+                        String token = response.body().getToken();
+                        saveToken(token);
+                        saveUserData(email, token);
+                        startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable throwable) {
+                    binding.loginProgressIndicator.setVisibility(View.GONE);
+                    binding.loginButton.setEnabled(true);
+                    Toast.makeText(LoginActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                    Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
+                }
+            });
+        }
+    }
+
+    private void saveUserData(String email, String token) {
+        UserSharedPreferencesManager sharedPref = UserSharedPreferencesManager.getInstance(this);
+
+        UserApiService userApiService = RetrofitClient.getInstance().getUserApiService();
+        Call<UserResponse> call = userApiService.getUser(email, token);
+
+        call.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
-                // Hide Progress Bar and Enable Login Button
-                binding.loginProgressIndicator.setVisibility(View.GONE);
-                binding.loginButton.setEnabled(true);
-
+            public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String token = response.body().getToken();
-                    saveToken(token);
-                    startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                    sharedPref.saveUserDetails(
+                            response.body().getName(),
+                            response.body().getEmail(),
+                            response.body().getPhone(),
+                            getOnlineBankingStatus(response),
+                            null,
+                            response.body().getAddress()
+                    );
                 }
             }
 
+            private boolean getOnlineBankingStatus(Response<UserResponse> response) {
+                assert response.body() != null;
+                return response.body().getOnlineBankingStatus().equals(OnlineBankingStatus.ACTIVE);
+            }
+
             @Override
-            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable throwable) {
-                binding.loginProgressIndicator.setVisibility(View.GONE);
-                binding.loginButton.setEnabled(true);
-                Toast.makeText(LoginActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable throwable) {
+                Toast.makeText(LoginActivity.this, "Network Error while loading Data", Toast.LENGTH_SHORT).show();
                 Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
             }
         });
     }
-        }
 
     private void saveToken(String token) {
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("JWT_TOKEN", "Bearer " + token);
-        editor.apply();
+        AppSharedPreferenceManager.getInstance(this).saveJwtToken(token);
     }
 }

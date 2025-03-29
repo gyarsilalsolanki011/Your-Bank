@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.adapters.AccountAdapter;
 import com.gyarsilalsolanki011.bankingapp.ui.adapters.TransactionAdapter;
@@ -66,15 +67,14 @@ public class HomeFragment extends Fragment {
         snapHelper.attachToRecyclerView(allAccounts);
 
         // Load transaction data
-        loadTransactionHistory();
+        loadRecentTransactions();
 
         // Load Accounts
         loadUserAccounts();
 
         // set name from sharedPreference
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("user_name", "Tiger");
-        tvUserName.setText("Hello "+extractFirstName(userName));
+        String userName = UserSharedPreferencesManager.getInstance(getContext()).getUserName();
+        tvUserName.setText("Hello " + extractFirstName(userName));
 
         // Notification Icon
         ImageView notificationIcon = view.findViewById(R.id.notificationIcon);
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void loadTransactionHistory() {
+    private void loadRecentTransactions() {
         // Dummy transaction list (Replace with API call)
         List<TransactionModel> transactionList = new ArrayList<>();
         transactionList.add(new TransactionModel("TXN001", "25 Mar 2025", "Transfer", 5000.00, true));

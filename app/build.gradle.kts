@@ -55,11 +55,7 @@ dependencies {
     // OkHttp for Logging Network Requests (Optional but Recommended)
     implementation(libs.logging.interceptor)
 
-    /*
-    // ViewPager2 (Required for swiping pages)
-    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    // Gson Converter dependency
+    implementation("com.google.code.gson:gson:2.8.9")
 
-    // Dots Indicator (For showing page indicators)
-    implementation ("com.tbuonomo:dotsindicator:4.3")
-    */
 }

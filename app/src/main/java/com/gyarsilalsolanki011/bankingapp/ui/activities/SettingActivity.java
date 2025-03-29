@@ -45,6 +45,7 @@ public class SettingActivity extends AppCompatActivity {
         binding.tvUserName.setText("Tiger Bhau");
         binding.tvUserEmail.setText("tiger@yahu.in");
 
+        // Hard Coded Data
         List<SettingsItem> settingsList = new ArrayList<>();
         settingsList.add(new SettingsItem(R.drawable.ic_profile, "Account", "Manage your account settings"));
         settingsList.add(new SettingsItem(R.drawable.ic_security, "Security", "Change password and manage security settings"));
