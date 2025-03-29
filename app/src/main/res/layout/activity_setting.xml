@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/bottom_nav_dark"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"/>
 
     <!-- Profile Section -->
     <LinearLayout
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:background="@drawable/card_bg"
+        android:background="@drawable/solid_card_bg"
         android:gravity="center_vertical">
 
         <ImageView

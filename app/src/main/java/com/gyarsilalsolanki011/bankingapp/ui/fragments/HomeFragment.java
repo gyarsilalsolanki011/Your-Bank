@@ -9,7 +9,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +22,16 @@ import android.widget.TextView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
-import com.gyarsilalsolanki011.bankingapp.ui.adapters.AccountPagerAdapter;
+import com.gyarsilalsolanki011.bankingapp.ui.adapters.AccountAdapter;
+import com.gyarsilalsolanki011.bankingapp.ui.adapters.TransactionAdapter;
 import com.gyarsilalsolanki011.bankingapp.ui.models.AccountModel;
+import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    private RecyclerView recentTransactions, allAccounts;
 
     public HomeFragment() {
         // empty constructor
@@ -45,22 +51,30 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*ViewPager2 viewPagerAccounts = view.findViewById(R.id.viewPagerAccounts);
-        *//*WormDotsIndicator dotsIndicator = view.findViewById(R.id.dotsIndicator);*//**/
+
         TextView tvUserName = view.findViewById(R.id.tvUserName);
+        recentTransactions = view.findViewById(R.id.recyclerTransactions);
+        allAccounts = view.findViewById(R.id.accountRecycler);
+
+        // Initialise recycler view
+        allAccounts.setLayoutManager(new LinearLayoutManager(getContext()));
+        recentTransactions.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        // Attach SnapHelper to make scrolling stop at each item
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(allAccounts);
+
+        // Load transaction data
+        loadTransactionHistory();
+
+        // Load Accounts
+        loadUserAccounts();
 
         // set name from sharedPreference
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("user_name", "Tiger");
         tvUserName.setText("Hello "+extractFirstName(userName));
-
-        // Load Accounts
-        List<AccountModel> accountList = fetchUserAccounts();
-        /*AccountPagerAdapter accountAdapter = new AccountPagerAdapter(requireContext(), accountList);
-        viewPagerAccounts.setAdapter(accountAdapter);*/
-
-        // Attach Indicator
-        // dotsIndicator.attachTo(viewPagerAccounts);
 
         // Notification Icon
         ImageView notificationIcon = view.findViewById(R.id.notificationIcon);
@@ -68,6 +82,30 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), NotificationActivity.class);
             startActivity(intent);
         });
+    }
+
+    private void loadTransactionHistory() {
+        // Dummy transaction list (Replace with API call)
+        List<TransactionModel> transactionList = new ArrayList<>();
+        transactionList.add(new TransactionModel("TXN001", "25 Mar 2025", "Transfer", 5000.00, true));
+        transactionList.add(new TransactionModel("TXN002", "22 Mar 2025", "Withdrawal", 2000.00, true));
+        transactionList.add(new TransactionModel("TXN003", "20 Mar 2025", "Transfer", 7500.00, true));
+        transactionList.add(new TransactionModel("TXN004", "18 Mar 2025", "Withdrawal", 1500.00, false)); // Failed txn
+        transactionList.add(new TransactionModel("TXN005", "15 Mar 2025", "Transfer", 3000.00, true));
+
+        // Set Adapter
+        TransactionAdapter transactionAdapter = new TransactionAdapter(getContext(), transactionList);
+        recentTransactions.setAdapter(transactionAdapter);
+    }
+
+    private void loadUserAccounts() {
+        List<AccountModel> accountList = new ArrayList<>();
+        accountList.add(new AccountModel("Saving", "1234567890", "5000"));
+        accountList.add(new AccountModel("Current", "0987654321", "12000"));
+
+        // set Adapter
+        AccountAdapter accountAdapter = new AccountAdapter(requireContext(), accountList);
+        allAccounts.setAdapter(accountAdapter);
     }
 
     public static String extractFirstName(String username) {
@@ -78,12 +116,5 @@ public class HomeFragment extends Fragment {
         String[] parts = username.trim().split("\\s+");
 
         return parts[0];
-    }
-
-    private List<AccountModel> fetchUserAccounts() {
-        return Arrays.asList(
-                new AccountModel("Saving", "1234567890", "5000"),
-                new AccountModel("Current", "0987654321", "12000")
-        );
     }
 }

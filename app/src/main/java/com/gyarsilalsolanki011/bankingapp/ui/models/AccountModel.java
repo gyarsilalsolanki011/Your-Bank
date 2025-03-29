@@ -5,7 +5,7 @@ public class AccountModel {
     private final String accountType;
     private final String balance;
 
-    public AccountModel(String accountNumber, String accountType, String balance) {
+    public AccountModel(String accountType, String accountNumber, String balance) {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;

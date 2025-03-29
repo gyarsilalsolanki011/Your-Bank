@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/card_bg"
+        android:background="@drawable/solid_card_bg"
         android:padding="5dp" >
 
         <!-- Profile Image (Left) -->
@@ -67,47 +67,11 @@
             android:src="@drawable/ic_notifications"/>
     </RelativeLayout>
 
-    <!-- ViewPager for Account Details -->
-    <!--<androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerAccounts"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accountRecycler"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:clipToPadding="false"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:overScrollMode="never"/>-->
-
-    <!-- Dots Indicator -->
-
-
-    <!-- Deposit & Withdraw Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingTop="16dp">
-
-        <Button
-            android:id="@+id/btnDeposit"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/deposit"
-            android:backgroundTint="@color/deposit_color"
-            android:textColor="@color/white"/>
-
-        <View android:layout_width="16dp" android:layout_height="match_parent"/>
-
-        <Button
-            android:id="@+id/btnWithdraw"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/withdraw"
-            android:backgroundTint="@color/withdraw_color"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+        android:layout_height="246dp"
+        android:clipToPadding="false"/>
 
     <!-- Recent Transaction History -->
     <TextView
@@ -118,13 +82,15 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:paddingTop="16dp"/>
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTransactions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"/>
 
 </LinearLayout>
 

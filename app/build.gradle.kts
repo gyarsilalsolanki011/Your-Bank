@@ -54,4 +54,12 @@ dependencies {
 
     // OkHttp for Logging Network Requests (Optional but Recommended)
     implementation(libs.logging.interceptor)
+
+    /*
+    // ViewPager2 (Required for swiping pages)
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+
+    // Dots Indicator (For showing page indicators)
+    implementation ("com.tbuonomo:dotsindicator:4.3")
+    */
 }

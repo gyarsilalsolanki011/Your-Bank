@@ -47,9 +47,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         if (transaction.getType().equalsIgnoreCase("Deposit")) {
             holder.ivIcon.setImageResource(R.drawable.ic_deposit);
             holder.tvAmount.setTextColor(context.getResources().getColor(R.color.deposit_color));
-        } else {
+        } else if (transaction.getType().equalsIgnoreCase("Withdrawal")){
             holder.ivIcon.setImageResource(R.drawable.ic_withdrawal);
             holder.tvAmount.setTextColor(context.getResources().getColor(R.color.withdraw_color));
+        } else {
+            holder.ivIcon.setImageResource(R.drawable.ic_transfer);
+            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.transfer_color));
         }
 
         // Change Icon Based on Transaction Type

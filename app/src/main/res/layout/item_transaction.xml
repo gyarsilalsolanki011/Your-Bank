@@ -7,13 +7,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="6dp"
-    android:background="@drawable/card_bg">
+    app:cardElevation="6dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_background"
+        android:background="@drawable/card_bg"
         android:padding="16dp">
 
         <!-- Transaction Icon -->

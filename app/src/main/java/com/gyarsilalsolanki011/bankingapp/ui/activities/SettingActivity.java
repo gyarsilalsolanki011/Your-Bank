@@ -1,11 +1,14 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.gyarsilalsolanki011.bankingapp.R;
@@ -32,7 +35,11 @@ public class SettingActivity extends AppCompatActivity {
 
         // Enable Back Button
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Setting");
+        Drawable navIcon = binding.toolbar.getNavigationIcon();
+        if (navIcon != null) {
+            navIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
+        getSupportActionBar().setTitle("Settings");
 
         // Example Data (You can load from API)
         binding.tvUserName.setText("Tiger Bhau");

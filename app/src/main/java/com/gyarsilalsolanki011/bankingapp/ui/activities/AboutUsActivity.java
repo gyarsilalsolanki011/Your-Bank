@@ -1,5 +1,7 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -7,6 +9,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -31,6 +34,10 @@ public class AboutUsActivity extends AppCompatActivity {
 
         // Enable Back Button
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Drawable navIcon = binding.toolbar.getNavigationIcon();
+        if (navIcon != null) {
+            navIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
         getSupportActionBar().setTitle("About Us");
     }
 

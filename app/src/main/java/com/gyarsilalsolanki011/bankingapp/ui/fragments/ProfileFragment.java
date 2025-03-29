@@ -60,6 +60,16 @@ public class ProfileFragment extends Fragment {
         // Simulating data from SharedPreferences (Replace with API call if needed)
         UserSharedPreferencesManager sharedPref = UserSharedPreferencesManager.getInstance(getContext());
 
+        /*// Default Shared Preference
+        sharedPref.saveUserDetails(
+                "Tiger Das",
+                "tiger@yahu.in",
+                "7620824421",
+                true,
+                "SAVINGS, CURRENT",
+                "123 Main Street, Jabalpur, India"
+        );*/
+
         userName.setText(sharedPref.getUserName());
         userEmail.setText(sharedPref.getUserEmail());
         userPhone.setText(sharedPref.getUserPhone());

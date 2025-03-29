@@ -1,6 +1,8 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -38,6 +41,10 @@ public class ContactUsActivity extends AppCompatActivity {
 
         // Enable Back Button
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Drawable navIcon = binding.toolbar.getNavigationIcon();
+        if (navIcon != null) {
+            navIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
         getSupportActionBar().setTitle("Contact Us");
 
         // Open Email

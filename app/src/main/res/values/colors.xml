@@ -22,5 +22,6 @@
     <color name="textPrimary">#FFFFFF</color>
     <color name="textSecondary">#B0B0B0</color>
     <color name="deposit_color">#4CAF50</color> <!-- Green for deposit -->
-    <color name="withdraw_color">#F44336</color> <!-- Red for withdraw -->
+    <color name="withdraw_color">#D32F2F</color>  <!-- Red for Withdraw -->
+    <color name="transfer_color">#1976D2</color>  <!-- Blue for Transfer -->
 </resources>
