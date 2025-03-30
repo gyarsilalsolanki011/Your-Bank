@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         String token = response.body().getToken();
                         saveToken(token);
-                        saveUserData(email, token);
+                        saveUserData(email);
                         startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
                         finish();
                     } else {
@@ -98,11 +98,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void saveUserData(String email, String token) {
+    private void saveUserData(String email) {
         UserSharedPreferencesManager sharedPref = UserSharedPreferencesManager.getInstance(this);
+
+        String token = AppSharedPreferenceManager.getInstance(this).getJwtToken();
 
         UserApiService userApiService = RetrofitClient.getInstance().getUserApiService();
         Call<UserResponse> call = userApiService.getUser(email, token);
+
 
         call.enqueue(new Callback<UserResponse>() {
             @Override
@@ -112,22 +115,18 @@ public class LoginActivity extends AppCompatActivity {
                             response.body().getName(),
                             response.body().getEmail(),
                             response.body().getPhone(),
-                            getOnlineBankingStatus(response),
+                            response.body().getOnlineBankingStatus(),
                             null,
                             response.body().getAddress()
                     );
                 }
             }
 
-            private boolean getOnlineBankingStatus(Response<UserResponse> response) {
-                assert response.body() != null;
-                return response.body().getOnlineBankingStatus().equals(OnlineBankingStatus.ACTIVE);
-            }
-
             @Override
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable throwable) {
                 Toast.makeText(LoginActivity.this, "Network Error while loading Data", Toast.LENGTH_SHORT).show();
                 Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
+                Log.d("User Details2", token);
             }
         });
     }

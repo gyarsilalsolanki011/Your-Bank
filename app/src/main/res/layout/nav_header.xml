@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="190dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="bottom"
     android:padding="20dp"
@@ -12,9 +13,10 @@
         android:id="@+id/appLogo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/bank_logo"
+        android:src="@drawable/ic_service"
         android:contentDescription="@string/app_logo_desc"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        app:tint="@color/primary"/>
 
     <!-- App Name -->
     <TextView

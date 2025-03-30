@@ -3,6 +3,8 @@ package com.gyarsilalsolanki011.bankingapp.core.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.gyarsilalsolanki011.bankingapp.core.enums.OnlineBankingStatus;
+
 public class UserSharedPreferencesManager {
     private static final String PREF_NAME = "user_prefs";
     private static UserSharedPreferencesManager instance;
@@ -22,14 +24,24 @@ public class UserSharedPreferencesManager {
     }
 
     // 🔹 Store User Data
-    public void saveUserDetails(String name, String email, String phone, boolean isOnlineBanking, String accounts, String address) {
+    public void saveUserDetails(String name, String email, String phone, OnlineBankingStatus onlineBankingStatus, String accounts, String address) {
         editor.putString("user_name", name);
         editor.putString("user_email", email);
         editor.putString("user_phone", phone);
-        editor.putBoolean("online_banking", isOnlineBanking);
+        editor.putString("online_banking", getProperCase(onlineBankingStatus));
         editor.putString("user_accounts", accounts);
         editor.putString("user_address", address);
         editor.apply();
+    }
+
+    private String getProperCase(OnlineBankingStatus onlineBankingStatus) {
+        if (onlineBankingStatus.equals(OnlineBankingStatus.ACTIVE)){
+            return "Active";
+        } else if (onlineBankingStatus.equals(OnlineBankingStatus.NOT_ACTIVE)) {
+            return "Not Active";
+        } else {
+            return "Pending for Approval";
+        }
     }
 
     // 🔹 Set UserAccounts Data
@@ -56,8 +68,8 @@ public class UserSharedPreferencesManager {
         return sharedPreferences.getString("user_phone", "+91 9876543210");
     }
 
-    public boolean isOnlineBankingEnabled() {
-        return sharedPreferences.getBoolean("online_banking", false);
+    public String getOnlineBankingStatus() {
+        return sharedPreferences.getString("online_banking", "Not Active");
     }
 
     public String getUserAccounts() {

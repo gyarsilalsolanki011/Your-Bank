@@ -67,4 +67,6 @@
     <string name="account_digit">************5065</string>
     <string name="account_type">Account Type</string>
     <string name="account_balance">Account Balance</string>
+    <string name="logout_alert">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
 </resources>
