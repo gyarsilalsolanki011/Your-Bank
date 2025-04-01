@@ -3,17 +3,27 @@ package com.gyarsilalsolanki011.bankingapp.core.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
 import com.gyarsilalsolanki011.bankingapp.core.enums.OnlineBankingStatus;
+import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserSharedPreferencesManager {
     private static final String PREF_NAME = "user_prefs";
     private static UserSharedPreferencesManager instance;
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
+    private final Gson gson;
 
     private UserSharedPreferencesManager(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        gson = new Gson();
     }
 
     public static synchronized UserSharedPreferencesManager getInstance(Context context) {
@@ -51,14 +61,16 @@ public class UserSharedPreferencesManager {
     }
 
     // 🔹 Set UserAccounts Data
-    public void setUserAccounts(String account){
-        String accounts = sharedPreferences.getString("user_accounts", "Not Available");
-        if (accounts.equals("Not Available")) {
-            editor.putString("user_accounts", account);
-        } else {
-            editor.putString("user_accounts", accounts + ", " + account);
-        }
+    public void setUserAccounts(List<AccountType> accounts){
+        String json = gson.toJson(accounts);
+        editor.putString("user_accounts", json);
         editor.apply();
+    }
+
+    public List<AccountType> getUserAccounts() {
+        String json = sharedPreferences.getString("user_accounts", null);
+        Type type = new TypeToken<List<AccountType>>() {}.getType();
+        return json != null ? gson.fromJson(json, type) : new ArrayList<>();
     }
 
     // 🔹 Get User Data
@@ -76,10 +88,6 @@ public class UserSharedPreferencesManager {
 
     public String getOnlineBankingStatus() {
         return sharedPreferences.getString("online_banking", "Not Active");
-    }
-
-    public String getUserAccounts() {
-        return sharedPreferences.getString("user_accounts", "Not Available, Create One");
     }
 
     public String getUserAddress() {

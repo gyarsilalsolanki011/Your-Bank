@@ -15,8 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
 import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProfileFragment extends Fragment {
     private TextView userName, userEmail, userPhone, userOnlineBankingStatus, userAccounts, userAddress;
@@ -64,7 +68,18 @@ public class ProfileFragment extends Fragment {
         userEmail.setText(sharedPref.getUserEmail());
         userPhone.setText(sharedPref.getUserPhone());
         userOnlineBankingStatus.setText(sharedPref.getOnlineBankingStatus());
-        userAccounts.setText(sharedPref.getUserAccounts()); // Example: "Savings, Current"
+        userAccounts.setText(stringListWithComa(sharedPref.getUserAccounts()));
         userAddress.setText(sharedPref.getUserAddress());
+    }
+
+    private String stringListWithComa(List<AccountType> userAccounts) {
+        String[] accounts = userAccounts.stream().map(Enum::toString).toArray(String[]::new);
+        if (accounts.length > 1){
+            return accounts[0]+", "+accounts[1];
+        } else if (accounts.length == 1){
+            return accounts[0];
+        } else {
+            return "Not Available, Create One";
+        }
     }
 }

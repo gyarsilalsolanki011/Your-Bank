@@ -12,6 +12,6 @@
         android:right="8dp"
         android:bottom="8dp"/>
 
-    <stroke android:color="@color/white" android:width="1dp"/>
+    <stroke android:color="@color/withdraw_color" android:width="1dp"/>
 
 </shape>

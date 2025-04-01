@@ -17,14 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
-import com.gyarsilalsolanki011.bankingapp.core.api.repository.AccountApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.UserApiService;
 import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionStatus;
+import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionType;
 import com.gyarsilalsolanki011.bankingapp.core.models.AccountResponse;
 import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
@@ -47,10 +47,10 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private RecyclerView recentTransactions, allAccounts;
     private AccountAdapter accountAdapter;
+    private String email, token;
 
 
     public HomeFragment() {
-        // empty constructor
     }
 
     @Nullable
@@ -67,6 +67,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        email = UserSharedPreferencesManager.getInstance(getContext()).getUserEmail();
+        token = AppSharedPreferenceManager.getInstance(getContext()).getJwtToken();
 
         TextView tvUserName = view.findViewById(R.id.tvUserName);
         recentTransactions = view.findViewById(R.id.recyclerTransactions);
@@ -99,25 +101,23 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    // Load recent Transactions
     private void loadRecentTransactions() {
         // Dummy transaction list (Replace with API call)
         List<TransactionModel> transactionList = new ArrayList<>();
-        transactionList.add(new TransactionModel( "25 Mar 2025", "Transfer", 5000.00, true));
-        transactionList.add(new TransactionModel( "22 Mar 2025", "Withdrawal", 2000.00, true));
-        transactionList.add(new TransactionModel( "20 Mar 2025", "Transfer", 7500.00, true));
-        transactionList.add(new TransactionModel( "18 Mar 2025", "Withdrawal", 1500.00, false)); // Failed txn
-        transactionList.add(new TransactionModel( "15 Mar 2025", "Transfer", 3000.00, true));
+        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.DEPOSIT, 5000.00, TransactionStatus.COMPLETED));
+        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.WITHDRAWAL, 5000.00, TransactionStatus.PENDING));
+        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.TRANSFER, 5000.00, TransactionStatus.FAILED));
 
         // Set Adapter
         TransactionAdapter transactionAdapter = new TransactionAdapter(getContext(), transactionList);
         recentTransactions.setAdapter(transactionAdapter);
     }
 
+
+    // Fetch Account Details
     @SuppressLint("NotifyDataSetChanged")
     private void fetchAccountDetails() {
-        String email = UserSharedPreferencesManager.getInstance(getContext()).getUserEmail();
-        String token = AppSharedPreferenceManager.getInstance(getContext()).getJwtToken();
-
         UserApiService userApiService = RetrofitClient.getInstance().getUserApiService();
         Call<List<AccountResponse>> call = userApiService.getAllAccounts(email, token);
 
@@ -129,7 +129,12 @@ public class HomeFragment extends Fragment {
                         .stream()
                         .map(AccountMapper::mapToAccountModel)
                         .collect(Collectors.toList());
-                updateRecyclerView(accountList);
+                updateAccountRecyclerView(accountList);
+                List<AccountType> accountTypeList = response.body()
+                        .stream()
+                        .map(AccountResponse::getAccountType)
+                        .collect(Collectors.toList());
+                setAccountTypeList(accountTypeList);
             }
 
             @Override
@@ -140,7 +145,7 @@ public class HomeFragment extends Fragment {
     }
 
     // Setup RecyclerView and ensure immediate UI update
-    private void updateRecyclerView(List<AccountModel> accountList) {
+    private void updateAccountRecyclerView(List<AccountModel> accountList) {
         if (accountAdapter == null) {
             accountAdapter = new AccountAdapter(getContext(), accountList);
             allAccounts.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -150,7 +155,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public static String extractFirstName(String username) {
+    private static String extractFirstName(String username) {
         if (username == null || username.trim().isEmpty()) {
             return "";
         }
@@ -158,5 +163,9 @@ public class HomeFragment extends Fragment {
         String[] parts = username.trim().split("\\s+");
 
         return parts[0];
+    }
+
+    public void setAccountTypeList(List<AccountType> accountTypeList){
+        UserSharedPreferencesManager.getInstance(getContext()).setUserAccounts(accountTypeList);
     }
 }

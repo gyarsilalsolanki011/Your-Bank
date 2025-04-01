@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionStatus;
+import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionType;
+import com.gyarsilalsolanki011.bankingapp.ui.models.AccountModel;
 import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
 
 import java.util.List;
@@ -24,6 +28,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public TransactionAdapter(Context context, List<TransactionModel> transactionList) {
         this.context = context;
         this.transactionList = transactionList;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setData(List<TransactionModel> newData) {
+        this.transactionList.addAll(newData);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -40,26 +50,33 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.tvAmount.setText("₹" + transaction.getAmount());
         holder.tvDate.setText(transaction.getDate());
-        holder.tvType.setText(transaction.getType());
-        holder.tvStatus.setText(transaction.isSuccess() ? "Success" : "Failed");
-
-        // Change Icon Based on Transaction Type
-        if (transaction.getType().equalsIgnoreCase("Deposit")) {
-            holder.ivIcon.setImageResource(R.drawable.ic_deposit);
-            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.deposit_color));
-        } else if (transaction.getType().equalsIgnoreCase("Withdrawal")){
-            holder.ivIcon.setImageResource(R.drawable.ic_withdrawal);
-            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.withdraw_color));
+        if (transaction.getTransactionStatus().equals(TransactionStatus.COMPLETED)){
+            holder.tvStatus.setText("Success");
+            holder.tvStatus.setTextColor(Color.GREEN);
+            holder.relativeLayout.setBackgroundResource(R.drawable.green_card_bg);
+        } else if (transaction.getTransactionStatus().equals(TransactionStatus.FAILED)){
+            holder.tvStatus.setText("Failed");
+            holder.tvStatus.setTextColor(Color.RED);
+            holder.relativeLayout.setBackgroundResource(R.drawable.red_card_bg);
         } else {
-            holder.ivIcon.setImageResource(R.drawable.ic_transfer);
-            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.transfer_color));
+            holder.tvStatus.setText("Pending");
+            holder.tvStatus.setTextColor(Color.YELLOW);
+            holder.relativeLayout.setBackgroundResource(R.drawable.yellow_card_bg);
         }
 
         // Change Icon Based on Transaction Type
-        if (transaction.isSuccess()){
-            holder.tvStatus.setTextColor(Color.GREEN);
+        if (transaction.getType().equals(TransactionType.DEPOSIT)) {
+            holder.tvType.setText("Received");
+            holder.ivIcon.setImageResource(R.drawable.ic_deposit);
+            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.deposit_color));
+        } else if (transaction.getType().equals(TransactionType.WITHDRAWAL)){
+            holder.tvType.setText("Withdrawal");
+            holder.ivIcon.setImageResource(R.drawable.ic_withdrawal);
+            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.withdraw_color));
         } else {
-            holder.tvStatus.setTextColor(Color.RED);
+            holder.tvType.setText("Transfer");
+            holder.ivIcon.setImageResource(R.drawable.ic_transfer);
+            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.transfer_color));
         }
     }
 
@@ -70,6 +87,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public static class TransactionViewHolder extends RecyclerView.ViewHolder {
         TextView tvAmount, tvDate, tvType, tvStatus;
+        RelativeLayout relativeLayout;
         ImageView ivIcon;
 
         public TransactionViewHolder(@NonNull View itemView) {
@@ -79,6 +97,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvType = itemView.findViewById(R.id.tvType);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             ivIcon = itemView.findViewById(R.id.ivIcon);
+            relativeLayout = itemView.findViewById(R.id.relativeLayout);
         }
     }
 }

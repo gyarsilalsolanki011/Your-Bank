@@ -39,6 +39,7 @@ public interface TransactionApiService {
     @GET("/api/transactions/account/transactions")
     Call<List<TransactionResponse>> getAllTransaction(
             @Query("accountType") String accountType,
-            @Query("email") String email
+            @Query("email") String email,
+            @Header("Authorization") String token
     );
 }

@@ -1,14 +1,15 @@
 package com.gyarsilalsolanki011.bankingapp.ui.models;
 
+import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionStatus;
 import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionType;
 
 public class TransactionModel {
     private final String date;
-    private final String type; // Deposit / Withdrawal
+    private final TransactionType type;
     private final double amount;
-    private final boolean success;
+    private final TransactionStatus success;
 
-    public TransactionModel(String date, String type, double amount, boolean success) {
+    public TransactionModel(String date, TransactionType type, double amount, TransactionStatus success) {
         this.date = date;
         this.type = type;
         this.amount = amount;
@@ -16,7 +17,7 @@ public class TransactionModel {
     }
 
     public String getDate() { return date; }
-    public String getType() { return type; }
+    public TransactionType getType() { return type; }
     public double getAmount() { return amount; }
-    public boolean isSuccess() { return success; }
+    public TransactionStatus getTransactionStatus() { return success; }
 }
