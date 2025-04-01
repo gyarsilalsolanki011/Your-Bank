@@ -106,8 +106,8 @@ public class HomeFragment extends Fragment {
         // Dummy transaction list (Replace with API call)
         List<TransactionModel> transactionList = new ArrayList<>();
         transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.DEPOSIT, 5000.00, TransactionStatus.COMPLETED));
-        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.WITHDRAWAL, 5000.00, TransactionStatus.PENDING));
-        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.TRANSFER, 5000.00, TransactionStatus.FAILED));
+        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.WITHDRAWAL, 5000.00, TransactionStatus.COMPLETED));
+        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.TRANSFER, 5000.00, TransactionStatus.COMPLETED));
 
         // Set Adapter
         TransactionAdapter transactionAdapter = new TransactionAdapter(getContext(), transactionList);
