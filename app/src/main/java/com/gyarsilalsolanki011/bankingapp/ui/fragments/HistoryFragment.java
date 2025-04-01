@@ -49,11 +49,11 @@ public class HistoryFragment extends Fragment {
     private void loadTransactionHistory() {
         // Dummy transaction list (Replace with API call)
         List<TransactionModel> transactionList = new ArrayList<>();
-        transactionList.add(new TransactionModel("TXN001", "25 Mar 2025", "Deposit", 5000.00, true));
-        transactionList.add(new TransactionModel("TXN002", "22 Mar 2025", "Withdrawal", 2000.00, true));
-        transactionList.add(new TransactionModel("TXN003", "20 Mar 2025", "Transfer", 7500.00, true));
-        transactionList.add(new TransactionModel("TXN004", "18 Mar 2025", "Withdrawal", 1500.00, false)); // Failed txn
-        transactionList.add(new TransactionModel("TXN005", "15 Mar 2025", "Deposit", 3000.00, true));
+        transactionList.add(new TransactionModel( "25 Mar 2025", "Deposit", 5000.00, true));
+        transactionList.add(new TransactionModel( "22 Mar 2025", "Withdrawal", 2000.00, true));
+        transactionList.add(new TransactionModel( "20 Mar 2025", "Transfer", 7500.00, true));
+        transactionList.add(new TransactionModel( "18 Mar 2025", "Withdrawal", 1500.00, false)); // Failed txn
+        transactionList.add(new TransactionModel( "15 Mar 2025", "Deposit", 3000.00, true));
 
         // Set Adapter
         TransactionAdapter transactionAdapter = new TransactionAdapter(getContext(), transactionList);

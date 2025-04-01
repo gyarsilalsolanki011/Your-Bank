@@ -44,15 +44,21 @@ public class UserSharedPreferencesManager {
         }
     }
 
+    // 🔹 Clear UserAccounts Data
+    public void clearUserAccounts(){
+        editor.remove("user_accounts");
+        editor.apply();
+    }
+
     // 🔹 Set UserAccounts Data
     public void setUserAccounts(String account){
         String accounts = sharedPreferences.getString("user_accounts", "Not Available");
         if (accounts.equals("Not Available")) {
             editor.putString("user_accounts", account);
         } else {
-            editor.putString("user_accounts", accounts+","+account);
+            editor.putString("user_accounts", accounts + ", " + account);
         }
-
+        editor.apply();
     }
 
     // 🔹 Get User Data

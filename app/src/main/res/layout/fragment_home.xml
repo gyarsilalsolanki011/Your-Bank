@@ -67,11 +67,19 @@
             android:src="@drawable/ic_notifications"/>
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarAccount"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/accountRecycler"
         android:layout_width="match_parent"
         android:layout_height="246dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        />
 
     <!-- Recent Transaction History -->
     <TextView
@@ -85,12 +93,20 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"/>
 
+    <ProgressBar
+        android:id="@+id/progressBarTransaction"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTransactions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        />
 
 </LinearLayout>
 

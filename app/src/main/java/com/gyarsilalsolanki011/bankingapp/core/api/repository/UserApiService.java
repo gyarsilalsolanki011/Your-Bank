@@ -2,8 +2,11 @@ package com.gyarsilalsolanki011.bankingapp.core.api.repository;
 
 import androidx.annotation.Nullable;
 
+import com.gyarsilalsolanki011.bankingapp.core.models.AccountResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.UserResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -37,6 +40,12 @@ public interface UserApiService {
 
     @GET("/api/users/online-banking-status")
     Call<StringResponse> getOnlineBankingStatus(
+            @Query("email") String email,
+            @Header("Authorization") String token
+    );
+
+    @GET("/api/users/all-accounts")
+    Call<List<AccountResponse>> getAllAccounts(
             @Query("email") String email,
             @Header("Authorization") String token
     );

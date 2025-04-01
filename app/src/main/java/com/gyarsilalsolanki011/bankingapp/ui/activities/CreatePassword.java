@@ -65,7 +65,7 @@ public class CreatePassword extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             String status = response.body().getStatus();
                             Toast.makeText(CreatePassword.this, status, Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(CreatePassword.this, UserDashboardActivity.class));
+                            startActivity(new Intent(CreatePassword.this, LoginActivity.class));
                             finish();
                         }
                     }

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivitySettingBinding;
 import com.gyarsilalsolanki011.bankingapp.ui.adapters.SettingsAdapter;
 import com.gyarsilalsolanki011.bankingapp.ui.models.SettingsItem;
@@ -42,8 +43,8 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Settings");
 
         // Example Data (You can load from API)
-        binding.tvUserName.setText("Tiger Bhau");
-        binding.tvUserEmail.setText("tiger@yahu.in");
+        binding.tvUserName.setText(UserSharedPreferencesManager.getInstance(this).getUserName());
+        binding.tvUserEmail.setText(UserSharedPreferencesManager.getInstance(this).getUserEmail());
 
         // Hard Coded Data
         List<SettingsItem> settingsList = new ArrayList<>();

@@ -1,11 +1,13 @@
 package com.gyarsilalsolanki011.bankingapp.ui.models;
 
+import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+
 public class AccountModel {
     private final String accountNumber;
-    private final String accountType;
-    private final String balance;
+    private final AccountType accountType;
+    private final Double balance;
 
-    public AccountModel(String accountType, String accountNumber, String balance) {
+    public AccountModel(AccountType accountType, String accountNumber, Double balance) {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;
@@ -15,11 +17,11 @@ public class AccountModel {
         return accountNumber;
     }
 
-    public String getAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 
-    public String getBalance() {
+    public Double getBalance() {
         return balance;
     }
 }

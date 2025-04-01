@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyarsilalsolanki011.bankingapp.R;
@@ -30,6 +28,13 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         this.accountList = accountList;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void setData(List<AccountModel> newData) {
+        this.accountList.clear();  // Clear old data
+        this.accountList.addAll(newData);  // Add new data
+        notifyDataSetChanged();  // Refresh UI
+    }
+
     @NonNull
     @Override
     public AccountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,15 +46,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     @Override
     public void onBindViewHolder(@NonNull AccountViewHolder holder, int position) {
         AccountModel account = accountList.get(position);
-        holder.tvAccountType.setText(account.getAccountType());
+        holder.tvAccountType.setText(account.getAccountType().toString());
         holder.tvAccountNumber.setText("***********" + account.getAccountNumber().substring(account.getAccountNumber().length() - 4));
 
         // Toggle balance visibility
-        holder.eyeIcon.setOnClickListener(v -> {
-            isBalanceVisible = !isBalanceVisible;
-            holder.tvBalance.setText(isBalanceVisible ? "₹" + account.getBalance() : "********");
-            holder.eyeIcon.setImageResource(isBalanceVisible ? R.drawable.ic_eye_open : R.drawable.ic_eye_closed );
-        });
+        holder.eyeIcon.setOnClickListener(v -> toggleBalance(holder, account));
 
         // Handle Withdraw Button Click
         holder.btnWithdraw.setOnClickListener(v -> {
@@ -83,5 +84,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             btnWithdraw = itemView.findViewById(R.id.btnWithdraw);
             btnTransfer = itemView.findViewById(R.id.btnTransfer);
         }
+    }
+
+    private void toggleBalance(AccountViewHolder holder, AccountModel account) {
+        isBalanceVisible = !isBalanceVisible;
+        holder.tvBalance.setText(isBalanceVisible ? "₹" + account.getBalance() : "********");
+        holder.eyeIcon.setImageResource(isBalanceVisible ? R.drawable.ic_eye_open : R.drawable.ic_eye_closed );
     }
 }
