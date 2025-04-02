@@ -70,4 +70,6 @@
     <string name="logout_alert">Are you sure you want to log out?</string>
     <string name="cancel">Cancel</string>
     <string name="withdraw">Withdraw</string>
+    <string name="update_user">Update User</string>
+    <string name="update">Update</string>
 </resources>

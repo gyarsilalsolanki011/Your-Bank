@@ -2,20 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activities.RegisterActivity"
+    android:id="@+id/updateUserActivity"
     android:background="@color/dark_background"
-    android:id="@+id/registrationActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp">
+    android:padding="24dp"
+    tools:context=".ui.activities.UpdateUserActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/userInformation"
+        android:text="@string/update_user"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"/>
@@ -72,12 +72,12 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Register Button -->
+    <!-- Update Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/registerButton"
+        android:id="@+id/updateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register"
+        android:text="@string/update"
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="@color/primary"
@@ -86,21 +86,11 @@
 
     <!-- Progress Bar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/registerProgressIndicator"
+        android:id="@+id/updateProgressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:indeterminate="true"
         android:layout_marginTop="20dp" />
-
-    <TextView
-        android:id="@+id/alreadyAccountTextButton"
-        android:layout_marginTop="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/light_blue"
-        android:text="@string/already_have_an_account_login"
-        android:clickable="true"
-        android:focusable="true" />
 
 </LinearLayout>

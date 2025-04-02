@@ -18,6 +18,7 @@ import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
 import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
+import com.gyarsilalsolanki011.bankingapp.ui.activities.UpdateUserActivity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class ProfileFragment extends Fragment {
 
         // Open Edit Profile Activity
         btnEditProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), NotificationActivity.class);
+            Intent intent = new Intent(getActivity(), UpdateUserActivity.class);
             startActivity(intent);
         });
     }
