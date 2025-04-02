@@ -2,8 +2,11 @@ package com.gyarsilalsolanki011.bankingapp.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +22,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.AccountApiService;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.TransactionApiService;
 import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+import com.gyarsilalsolanki011.bankingapp.core.models.TransactionResponse;
+import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
+import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.databinding.DialogTransferBinding;
 import com.gyarsilalsolanki011.bankingapp.databinding.DialogWithdrawBinding;
+import com.gyarsilalsolanki011.bankingapp.ui.Mappers.TransactionMapper;
+import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
+import com.gyarsilalsolanki011.bankingapp.ui.fragments.HomeFragment;
 import com.gyarsilalsolanki011.bankingapp.ui.models.AccountModel;
+import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
+import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder> {
     private final Context context;
@@ -64,13 +87,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         // Handle Withdraw Button Click
         holder.btnWithdraw.setOnClickListener(v -> {
             showWithdrawDialog(account.getAccountNumber(), account.getAccountType());
-            Toast.makeText(holder.itemView.getContext(), "Withdraw from " + account.getAccountNumber(), Toast.LENGTH_SHORT).show();
         });
 
         // Handle Transfer Button Click
         holder.btnTransfer.setOnClickListener(v -> {
             showTransferDialog(account.getAccountNumber(), account.getAccountType());
-            Toast.makeText(holder.itemView.getContext(), "Transfer from " + account.getAccountNumber(), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -123,7 +144,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             if (!input.isEmpty()) {
                 try {
                     double amount = Double.parseDouble(input);
-                    makeWithdrawal(accountType, amount);
+                    makeWithdrawal(accountType.toString(), amount);
                     dialog.dismiss();
                 } catch (NumberFormatException e) {
                     binding.amountInput.setError("Enter a valid amount");
@@ -134,8 +155,29 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         });
     }
 
-    private void makeWithdrawal(AccountType accountType, double amount) {
+    private void makeWithdrawal(String accountType, double amount) {
+        String email = UserSharedPreferencesManager.getInstance(context).getUserEmail();
+        String token = AppSharedPreferenceManager.getInstance(context).getJwtToken();
 
+        TransactionApiService apiService = RetrofitClient.getInstance().getTransactionApiService();
+        Call<TransactionResponse> call = apiService.withdraw(accountType, amount, email, token);
+
+        call.enqueue(new Callback<TransactionResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<TransactionResponse> call, @NonNull Response<TransactionResponse> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    Toast.makeText(context, "Withdraw from " + accountType + "Account ", Toast.LENGTH_SHORT).show();
+                    TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
+                    sendNotification(transaction);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TransactionResponse> call, @NonNull Throwable throwable) {
+                Toast.makeText(context, "Error: "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
+            }
+        });
     }
 
     // Transfer Method
@@ -164,7 +206,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             } else {
                 try {
                     double amount = Double.parseDouble(input);
-                    makeTransfer(accountType, amount, toAccountNumber);
+                    makeTransfer(accountType.toString(), amount, toAccountNumber);
                     dialog.dismiss();
                 } catch (NumberFormatException e) {
                     binding.amountInput.setError("Enter a valid amount");
@@ -173,7 +215,61 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         });
     }
 
-    private void makeTransfer(AccountType accountType, double amount, String toAccountNumber) {
+    private void makeTransfer(String accountType, double amount, String toAccountNumber) {
+        String email = UserSharedPreferencesManager.getInstance(context).getUserEmail();
+        String token = AppSharedPreferenceManager.getInstance(context).getJwtToken();
 
+        TransactionApiService apiService = RetrofitClient.getInstance().getTransactionApiService();
+        Call<TransactionResponse> call = apiService.transfer(accountType, amount, email, toAccountNumber, token);
+
+        call.enqueue(new Callback<TransactionResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<TransactionResponse> call, @NonNull Response<TransactionResponse> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    Toast.makeText(context, "Transfer from " + accountType + "Account to "+toAccountNumber, Toast.LENGTH_SHORT).show();
+                    TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
+                    sendNotification(transaction);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TransactionResponse> call, @NonNull Throwable throwable) {
+                Toast.makeText(context, "Error: "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
+
+            }
+        });
+
+    }
+
+
+    public static String getTimeAgo(String dateString) {
+        if (dateString == null || dateString.isEmpty()) return "Unknown"; // Handle null cases
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()); // Adjust format as needed
+
+        try {
+            Date date = sdf.parse(dateString); // Convert String to Date
+            if (date == null) return "Unknown"; // In case parsing fails
+            long timestamp = date.getTime(); // Convert Date to milliseconds
+
+            return DateUtils.getRelativeTimeSpanString(
+                    timestamp,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+            ).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Invalid Date";
+        }
+    }
+
+    private void sendNotification(TransactionModel transaction) {
+        List<NotificationModel> notificationList = new ArrayList<>();
+        notificationList.add(new NotificationModel(
+                "Transaction "+transaction.getType()+" is "+transaction.getTransactionStatus(),
+                "₹"+transaction.getAmount()+" Debited from your account",
+                getTimeAgo(transaction.getDate())));
+        AppSharedPreferenceManager.getInstance(context).saveNotificationList(notificationList);
     }
 }

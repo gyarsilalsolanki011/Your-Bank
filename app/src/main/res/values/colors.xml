@@ -7,7 +7,8 @@
     <color name="gray">#9E9E9E</color>
     <color name="light_green">#0F816E</color>
     <color name="light_gray">#F5F5F5</color>
-    <color name="light_blue">#2196F3</color>
+    <color name="blue">#2196F3</color>
+    <color name="light_blue">#93C7F0</color>
     <color name="bottom_nav_dark">#292A2D</color> <!-- Dark Grey -->
     <color name="nav_selected">#BB86FC</color> <!-- Light Purple (Accent) -->
     <color name="nav_unselected">#B0B3B8</color> <!-- Greyish -->

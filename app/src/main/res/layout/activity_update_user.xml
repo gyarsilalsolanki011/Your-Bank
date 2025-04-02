@@ -7,90 +7,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
     tools:context=".ui.activities.UpdateUserActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="top"
+        android:layout_height="52dp"
+        android:background="@color/bottom_nav_dark"
+        app:titleTextColor="@android:color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_gravity="center"
-        android:text="@string/update_user"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userNameInput"
-            android:layout_width="match_parent"
-            android:hint="@string/userName"
-            android:inputType="text"
+        android:gravity="center"
+        android:padding="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/update_user"
             android:textColor="@color/white"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailInput"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userNameInput"
+                android:layout_width="match_parent"
+                android:hint="@string/userName"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumberInput"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:hint="@string/phone"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addressInput"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:hint="@string/address"
-            android:inputType="textAutoComplete"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumberInput"
+                android:layout_width="match_parent"
+                android:hint="@string/phone"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addressInput"
+                android:layout_width="match_parent"
+                android:hint="@string/address"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Update Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/updateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/primary"
             android:textColor="@color/white"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="20dp"/>
 
-    <!-- Update Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/updateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/update"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:backgroundTint="@color/primary"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"/>
+        <!-- Progress Bar -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/updateProgressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminate="true"
+            android:layout_marginTop="20dp" />
 
-    <!-- Progress Bar -->
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/updateProgressIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:indeterminate="true"
-        android:layout_marginTop="20dp" />
-
+    </LinearLayout>
 </LinearLayout>

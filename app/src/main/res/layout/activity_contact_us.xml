@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="@string/contactEmail"
             android:textSize="16sp"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/blue"
             android:clickable="true"
             android:focusable="true"/>
 
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:text="@string/contactPhone"
             android:textSize="16sp"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/blue"
             android:clickable="true"
             android:focusable="true"/>
 

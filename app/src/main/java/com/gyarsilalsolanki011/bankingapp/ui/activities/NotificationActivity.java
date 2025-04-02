@@ -54,13 +54,6 @@ public class NotificationActivity extends AppCompatActivity {
         binding.recyclerViewNotifications.setAdapter(adapter);
     }
 
-    //Call this method to add transaction notification
-    public void sendTransactionNotifications(NotificationModel notification){
-        List<NotificationModel> notifications = new ArrayList<>();
-        notifications.add(0, notification);
-        AppSharedPreferenceManager.getInstance(this).saveNotificationList(notifications);
-    }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) { // Handle back button

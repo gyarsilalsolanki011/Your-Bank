@@ -84,7 +84,9 @@ public class HomeFragment extends Fragment {
         snapHelper.attachToRecyclerView(allAccounts);
 
         // Load transaction data
-        loadRecentTransactions();
+        if (!email.isEmpty()){
+            loadRecentTransactions();
+        }
 
         // Load Accounts
         fetchAccountDetails();
@@ -102,12 +104,9 @@ public class HomeFragment extends Fragment {
     }
 
     // Load recent Transactions
-    private void loadRecentTransactions() {
-        // Dummy transaction list (Replace with API call)
-        List<TransactionModel> transactionList = new ArrayList<>();
-        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.DEPOSIT, 5000.00, TransactionStatus.COMPLETED));
-        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.WITHDRAWAL, 5000.00, TransactionStatus.COMPLETED));
-        transactionList.add(new TransactionModel( "25 Mar 2025", TransactionType.TRANSFER, 5000.00, TransactionStatus.COMPLETED));
+    public void loadRecentTransactions() {
+        // Transaction List From shared preference
+        List<TransactionModel> transactionList = AppSharedPreferenceManager.getInstance(getContext()).getTransactionList();
 
         // Set Adapter
         TransactionAdapter transactionAdapter = new TransactionAdapter(getContext(), transactionList);
@@ -134,7 +133,7 @@ public class HomeFragment extends Fragment {
                         .stream()
                         .map(AccountResponse::getAccountType)
                         .collect(Collectors.toList());
-                setAccountTypeList(accountTypeList);
+                saveAccountTypeList(accountTypeList);
             }
 
             @Override
@@ -155,6 +154,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    // Extract First Name
     private static String extractFirstName(String username) {
         if (username == null || username.trim().isEmpty()) {
             return "";
@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment {
         return parts[0];
     }
 
-    public void setAccountTypeList(List<AccountType> accountTypeList){
+    public void saveAccountTypeList(List<AccountType> accountTypeList){
         UserSharedPreferencesManager.getInstance(getContext()).setUserAccounts(accountTypeList);
     }
 }

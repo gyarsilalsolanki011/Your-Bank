@@ -35,6 +35,7 @@ import retrofit2.Response;
 public class HistoryFragment extends Fragment {
     private RecyclerView rvTransactionHistory;
     private TransactionAdapter transactionAdapter;
+    private List<TransactionModel> newTransactionList;
     private final String email;
     private final String token;
 
@@ -81,6 +82,7 @@ public class HistoryFragment extends Fragment {
                         .map(TransactionMapper::mapToTransactionModel)
                         .collect(Collectors.toList());
                 updateTransactionRecyclerView(transactionList);
+                saveTransactionList(transactionList);
             }
 
             @Override
@@ -98,5 +100,9 @@ public class HistoryFragment extends Fragment {
         } else {
             transactionAdapter.setData(transactionList);  // Update data dynamically
         }
+    }
+
+    private void saveTransactionList(List<TransactionModel> transactionList) {
+        AppSharedPreferenceManager.getInstance(getContext()).saveTransactionList(transactionList);
     }
 }

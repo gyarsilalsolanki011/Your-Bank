@@ -1,19 +1,22 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
-import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.UserApiService;
-import com.gyarsilalsolanki011.bankingapp.core.models.LoginResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
 import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.core.utils.TokenManager;
@@ -35,6 +38,17 @@ public class UpdateUserActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityUpdateUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Initialize Toolbar
+        setSupportActionBar(binding.toolbar);
+
+        // Enable Back Button
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Drawable navIcon = binding.toolbar.getNavigationIcon();
+        if (navIcon != null) {
+            navIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
+        getSupportActionBar().setTitle("Update Service");
 
         binding.updateButton.setOnClickListener(v -> updateUser());
     }
@@ -82,5 +96,14 @@ public class UpdateUserActivity extends AppCompatActivity {
                 Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) { // Handle back button
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

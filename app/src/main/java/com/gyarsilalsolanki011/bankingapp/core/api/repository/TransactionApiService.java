@@ -29,10 +29,10 @@ public interface TransactionApiService {
 
     @POST("/api/transactions/transfer")
     Call<TransactionResponse> transfer(
-            @Query("toAccountNumber") String toAccountNumber,
             @Query("accountType") String accountType,
             @Query("amount") double amount,
             @Query("email") String email,
+            @Query("toAccountNumber") String toAccountNumber,
             @Header("Authorization") String token
     );
 

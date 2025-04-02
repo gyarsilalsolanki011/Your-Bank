@@ -19,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         checkLoginStatus();
+        //TokenManager.logoutUser(this);
     }
 
     @Override
@@ -26,9 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
-
         //Set animation for SplashActivity
-
     }
 
     private void checkLoginStatus() {

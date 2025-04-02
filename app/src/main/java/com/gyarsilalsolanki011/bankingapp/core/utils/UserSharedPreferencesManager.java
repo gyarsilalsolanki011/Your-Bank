@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
 import com.gyarsilalsolanki011.bankingapp.core.enums.OnlineBankingStatus;
-import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

@@ -89,7 +89,7 @@
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/light_blue"
+        android:textColor="@color/blue"
         android:textSize="16sp"
         android:text="@string/don_t_have_an_account_create_one"
         android:clickable="true"

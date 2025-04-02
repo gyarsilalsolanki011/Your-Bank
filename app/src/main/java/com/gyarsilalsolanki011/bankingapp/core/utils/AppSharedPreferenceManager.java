@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
+import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class AppSharedPreferenceManager {
     private static final String PREF_NAME = "AppPrefs";
     private static final String KEY_JWT_TOKEN = "JWT_TOKEN";
     private static final String KEY_NOTIFICATIONS = "NOTIFICATION_LIST";
+    private static final String KEY_TRANSACTIONS = "TRANSACTION_LIST";
 
     private static AppSharedPreferenceManager instance;
     private final SharedPreferences sharedPreferences;
@@ -61,9 +63,29 @@ public class AppSharedPreferenceManager {
         return json != null ? gson.fromJson(json, type) : new ArrayList<>();
     }
 
+    // 🔹 Save Transaction List
+    public void saveTransactionList(List<TransactionModel> transactions) {
+        String json = gson.toJson(transactions);
+        editor.putString(KEY_TRANSACTIONS, json);
+        editor.apply();
+    }
+
+    // 🔹 Retrieve Notification List
+    public List<TransactionModel> getTransactionList() {
+        String json = sharedPreferences.getString(KEY_TRANSACTIONS, null);
+        Type type = new TypeToken<List<TransactionModel>>() {}.getType();
+        return json != null ? gson.fromJson(json, type) : new ArrayList<>();
+    }
+
     // 🔹 Clear JWT Token (Logout)
     public void clearJwtToken() {
         editor.remove(KEY_JWT_TOKEN);
+        editor.apply();
+    }
+
+    // 🔹 Clear Transactions
+    public void clearTransactions() {
+        editor.remove(KEY_TRANSACTIONS);
         editor.apply();
     }
 

@@ -82,5 +82,18 @@
     <string name="savings_account">Savings Account</string>
     <string name="current_account">Current Account</string>
     <string name="fixed_deposit">Fixed Deposit</string>
-
+    <string name="account_services">Account Services (Savings, Current, Fixed Deposit)</string>
+    <string name="banking_services">Banking Services</string>
+    <string name="view_notifications">View Notifications</string>
+    <string name="create_bank_account">Create Your Bank Account</string>
+    <string name="account_service_deposit">Account Service (Deposit Money)</string>
+    <string name="account_service_withdraw">Account Service (Withdraw Money)</string>
+    <string name="account_service_transfer">Account Service (transfer Money)</string>
+    <string name="update_service">Update Service (Update Your User Profile)</string>
+    <string name="Notification_service">Notification Service (View Your Notifications)</string>
+    <string name="deposit_money_account">Deposit Money to Your Account</string>
+    <string name="withdraw_money_account">Withdraw Money From Your Account</string>
+    <string name="transfer_money_account">Transfer Money From Your Account</string>
+    <string name="update_your_profile">Update Your Profile</string>
+    <string name="view_your_notification">View Your Notifications</string>
 </resources>
