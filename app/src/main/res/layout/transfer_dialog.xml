@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:id="@+id/withdrawDialog"
+    android:id="@+id/transferDialog"
     android:background="@color/dark_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/withdraw_money"
+        android:text="@string/transfer_money"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
@@ -38,7 +38,7 @@
             android:id="@+id/accountTypeInput"
             android:inputType="textAutoComplete"
             android:layout_width="match_parent"
-            android:hint="@string/account_type"
+            android:hint="@string/from_account_type"
             android:textColor="@color/white"
             android:textColorHint="@color/gray"
             android:layout_height="wrap_content"
@@ -54,11 +54,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/accountNumberInput"
             android:layout_width="match_parent"
-            android:hint="@string/account_number"
+            android:hint="@string/from_account"
             android:textColor="@color/white"
             android:inputType="textAutoComplete"
             android:textColorHint="@color/gray"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Amount Input -->
@@ -76,12 +76,27 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Account Number Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/toAccountNumberInput"
+            android:layout_width="match_parent"
+            android:hint="@string/to_account_number"
+            android:textColor="@color/white"
+            android:inputType="textAutoComplete"
+            android:textColorHint="@color/gray"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- withdraw Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/withdrawButton"
+        android:id="@+id/transferButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/withdraw"
+        android:text="@string/transfer"
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="@color/primary"
@@ -90,7 +105,7 @@
 
     <!-- Progress Bar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/withdrawProgressIndicator"
+        android:id="@+id/transferProgressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

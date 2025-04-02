@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:id="@+id/withdrawDialog"
+    android:id="@+id/depositDialog"
     android:background="@color/dark_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="24dp">
 
-    <!-- withdraw Icon -->
+    <!-- Logout Icon -->
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:contentDescription="@string/image"
-        android:src="@drawable/ic_deduct"
+        android:src="@drawable/ic_receive"
         app:tint="@color/white"
         android:layout_gravity="center"/>
 
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/withdraw_money"
+        android:text="@string/deposit_money"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
@@ -58,7 +58,7 @@
             android:textColor="@color/white"
             android:inputType="textAutoComplete"
             android:textColorHint="@color/gray"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Amount Input -->
@@ -73,15 +73,16 @@
             android:textColor="@color/white"
             android:inputType="textAutoComplete"
             android:textColorHint="@color/gray"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <!-- withdraw Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/withdrawButton"
+        android:id="@+id/depositButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/withdraw"
+        android:text="@string/deposit"
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="@color/primary"
@@ -90,11 +91,11 @@
 
     <!-- Progress Bar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/withdrawProgressIndicator"
+        android:id="@+id/depositProgressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:indeterminate="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>

@@ -17,11 +17,9 @@ import android.widget.TextView;
 import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
 import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
-import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.UpdateUserActivity;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProfileFragment extends Fragment {
     private TextView userName, userEmail, userPhone, userOnlineBankingStatus, userAccounts, userAddress;

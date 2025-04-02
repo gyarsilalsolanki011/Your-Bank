@@ -1,5 +1,6 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +62,12 @@ public class UpdateUserActivity extends AppCompatActivity {
                 binding.updateButton.setEnabled(true);
                 if (response.isSuccessful() && response.body() != null) {
                     if (!email.isEmpty() || !name.isEmpty()) {
-                        loginUserWithNewCredentials(email);
+                        TokenManager.logoutUser(getApplicationContext());
+                        // Redirect to Login Activity
+                        Intent intent = new Intent(UpdateUserActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                     }
                     String status = response.body().getStatus();
                     Toast.makeText(UpdateUserActivity.this, status, Toast.LENGTH_SHORT).show();
@@ -76,9 +82,5 @@ public class UpdateUserActivity extends AppCompatActivity {
                 Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
             }
         });
-    }
-
-    private void loginUserWithNewCredentials(String email) {
-
     }
 }

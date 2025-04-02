@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:id="@+id/withdrawDialog"
+    android:id="@+id/createAccountDialog"
     android:background="@color/dark_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="24dp">
 
-    <!-- withdraw Icon -->
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:contentDescription="@string/image"
-        android:src="@drawable/ic_deduct"
-        app:tint="@color/white"
-        android:layout_gravity="center"/>
-
     <!-- Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/withdraw_money"
+        android:text="@string/create_account"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:gravity="center"/>
+
+    <!-- Email Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:hint="@string/email"
+            android:textColor="@color/white"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/gray"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Account Type Input -->
     <com.google.android.material.textfield.TextInputLayout
@@ -44,21 +49,6 @@
             android:layout_height="wrap_content"
             android:text="@string/select_account_type"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Account Number Input -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/accountNumberInput"
-            android:layout_width="match_parent"
-            android:hint="@string/account_number"
-            android:textColor="@color/white"
-            android:inputType="textAutoComplete"
-            android:textColorHint="@color/gray"
-            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Amount Input -->
@@ -78,10 +68,10 @@
 
     <!-- withdraw Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/withdrawButton"
+        android:id="@+id/createAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/withdraw"
+        android:text="@string/create_account"
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="@color/primary"
@@ -90,7 +80,7 @@
 
     <!-- Progress Bar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/withdrawProgressIndicator"
+        android:id="@+id/createAccountProgressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

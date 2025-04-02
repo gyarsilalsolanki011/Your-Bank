@@ -72,4 +72,17 @@
     <string name="withdraw">Withdraw</string>
     <string name="update_user">Update User</string>
     <string name="update">Update</string>
+    <string name="withdraw_money">Withdraw Money</string>
+    <string name="deposit_money">Deposit Money</string>
+    <string name="transfer_money">Transfer Money</string>
+    <string name="amount">Amount</string>
+    <string name="from_account">From Account Number</string>
+    <string name="from_account_type">From Account Type</string>
+    <string name="to_account_number">To Account Number</string>
+    <string name="create_account">Create Account</string>
+    <string name="select_account_type">Select Account Type</string>
+    <string name="savings_account">Savings Account</string>
+    <string name="current_account">Current Account</string>
+    <string name="fixed_deposit">Fixed Deposit</string>
+
 </resources>

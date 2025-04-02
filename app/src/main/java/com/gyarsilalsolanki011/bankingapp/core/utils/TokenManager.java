@@ -41,6 +41,7 @@ public class TokenManager {
     // Method to log out user
     public static void logoutUser(Context context) {
         AppSharedPreferenceManager.getInstance(context).clearJwtToken();
+        UserSharedPreferencesManager.getInstance(context).clearUserData();
     }
 
 }
