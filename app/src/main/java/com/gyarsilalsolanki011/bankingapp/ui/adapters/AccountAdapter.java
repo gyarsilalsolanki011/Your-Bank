@@ -162,7 +162,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(context, "Money Withdrawal is success", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction);
+                    sendNotification(transaction, response.body().getDate());
                 }
             }
 
@@ -222,7 +222,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(context, "Money Debited Successfully ", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction);
+                    sendNotification(transaction, response.body().getDate());
                 }
             }
 
@@ -236,12 +236,12 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
 
     }
 
-    private void sendNotification(TransactionModel transaction) {
+    private void sendNotification(TransactionModel transaction, Date date) {
         List<NotificationModel> notificationList = AppSharedPreferenceManager.getInstance(context).getNotificationList();
         notificationList.add(0, new NotificationModel(
-                "Transaction "+transaction.getType()+" is "+transaction.getTransactionStatus(),
+                "Transaction Successful",
                 "₹"+transaction.getAmount()+" Debited from your account",
-                transaction.getDate()));
+                date));
         AppSharedPreferenceManager.getInstance(context).saveNotificationList(notificationList);
     }
 }

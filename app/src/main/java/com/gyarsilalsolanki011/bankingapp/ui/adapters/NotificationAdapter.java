@@ -56,13 +56,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
     }
 
-    private static String getTimeAgo(String dateString) {
-        if (dateString == null || dateString.isEmpty()) return "Unknown"; // Handle null cases
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()); // Adjust format as needed
-
+    private static String getTimeAgo(Date date) {
         try {
-            Date date = sdf.parse(dateString); // Convert String to Date
             if (date == null) return "Unknown"; // In case parsing fails
             long timestamp = date.getTime(); // Convert Date to milliseconds
 
@@ -71,7 +66,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
             ).toString();
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "Invalid Date";
         }

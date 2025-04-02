@@ -1,11 +1,13 @@
 package com.gyarsilalsolanki011.bankingapp.ui.models;
 
+import java.util.Date;
+
 public class NotificationModel {
     private final String title;
     private final String message;
-    private final String time;
+    private final Date time;
 
-    public NotificationModel(String title, String message, String time) {
+    public NotificationModel(String title, String message, Date time) {
         this.title = title;
         this.message = message;
         this.time = time;
@@ -13,6 +15,6 @@ public class NotificationModel {
 
     public String getTitle() { return title; }
     public String getMessage() { return message; }
-    public String getTime() { return time; }
+    public Date getTime() { return time; }
 
 }

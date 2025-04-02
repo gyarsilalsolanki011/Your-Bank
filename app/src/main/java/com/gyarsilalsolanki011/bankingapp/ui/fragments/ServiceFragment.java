@@ -140,7 +140,7 @@ public class ServiceFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(getContext(), "Your Withdrawal is success!", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction);
+                    sendNotification(transaction, response.body().getDate());
                 }
             }
 
@@ -201,7 +201,7 @@ public class ServiceFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(getContext(), "Your Transfer is success !", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction);
+                    sendNotification(transaction, response.body().getDate());
                 }
             }
 
@@ -216,15 +216,12 @@ public class ServiceFragment extends Fragment {
 
 
     // 🔹Save Transaction To sharedPreference
-    private void sendNotification(TransactionModel transaction) {
+    private void sendNotification(TransactionModel transaction, Date date) {
         List<NotificationModel> notificationList = AppSharedPreferenceManager.getInstance(getContext()).getNotificationList();
-        notificationList.add(new NotificationModel("Transaction Successful", "You received ₹10,000.", "3 April 2025"));
-        notificationList.add(new NotificationModel("New Offer", "Get 5% cashback on bill payments.", "2 april 2025"));
-        notificationList.add(new NotificationModel("Security Alert", "New login from an unknown device.", "16 March 2025"));
         notificationList.add(0, new NotificationModel(
                 "Transaction Successful",
                 "₹"+transaction.getAmount()+" Debited from your account",
-                transaction.getDate()));
+                 date));
         AppSharedPreferenceManager.getInstance(getContext()).saveNotificationList(notificationList);
     }
 }
