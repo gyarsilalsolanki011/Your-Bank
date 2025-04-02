@@ -2,21 +2,30 @@ package com.gyarsilalsolanki011.bankingapp.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+import com.gyarsilalsolanki011.bankingapp.databinding.DialogTransferBinding;
+import com.gyarsilalsolanki011.bankingapp.databinding.DialogWithdrawBinding;
 import com.gyarsilalsolanki011.bankingapp.ui.models.AccountModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder> {
     private final Context context;
@@ -54,14 +63,14 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
 
         // Handle Withdraw Button Click
         holder.btnWithdraw.setOnClickListener(v -> {
+            showWithdrawDialog(account.getAccountNumber(), account.getAccountType());
             Toast.makeText(holder.itemView.getContext(), "Withdraw from " + account.getAccountNumber(), Toast.LENGTH_SHORT).show();
-            // TODO: Open Withdraw Dialog or Activity
         });
 
         // Handle Transfer Button Click
         holder.btnTransfer.setOnClickListener(v -> {
+            showTransferDialog(account.getAccountNumber(), account.getAccountType());
             Toast.makeText(holder.itemView.getContext(), "Transfer from " + account.getAccountNumber(), Toast.LENGTH_SHORT).show();
-            // TODO: Open Transfer Dialog or Activity
         });
     }
 
@@ -90,5 +99,81 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         isBalanceVisible = !isBalanceVisible;
         holder.tvBalance.setText(isBalanceVisible ? "₹" + account.getBalance() : "********");
         holder.eyeIcon.setImageResource(isBalanceVisible ? R.drawable.ic_eye_open : R.drawable.ic_eye_closed );
+    }
+
+    // Withdraw method
+    private void showWithdrawDialog(String accountNumber, AccountType accountType) {
+        // Use View Binding for Dialog
+        DialogWithdrawBinding binding = DialogWithdrawBinding.inflate(LayoutInflater.from(context));
+
+        // Create Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(binding.getRoot());
+        AlertDialog dialog = builder.create();
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        // Set Text
+        binding.accountTypeInput.setText(accountType.toString());
+        binding.accountNumberInput.setText(accountNumber);
+
+        // Handle Withdraw Button Click
+        binding.withdrawButton.setOnClickListener(v -> {
+            String input = Objects.requireNonNull(binding.amountInput.getText()).toString().trim();
+            if (!input.isEmpty()) {
+                try {
+                    double amount = Double.parseDouble(input);
+                    makeWithdrawal(accountType, amount);
+                    dialog.dismiss();
+                } catch (NumberFormatException e) {
+                    binding.amountInput.setError("Enter a valid amount");
+                }
+            } else {
+                binding.amountInput.setError("Field cannot be empty");
+            }
+        });
+    }
+
+    private void makeWithdrawal(AccountType accountType, double amount) {
+
+    }
+
+    // Transfer Method
+    private void showTransferDialog(String accountNumber, AccountType accountType) {
+        DialogTransferBinding binding = DialogTransferBinding.inflate(LayoutInflater.from(context));
+
+        // Create Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(binding.getRoot());
+        AlertDialog dialog = builder.create();
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        // Set Text
+        binding.accountTypeInput.setText(accountType.toString());
+        binding.accountNumberInput.setText(accountNumber);
+
+        // Handle Transfer Button Click
+        binding.transferButton.setOnClickListener(v -> {
+            String input = Objects.requireNonNull(binding.amountInput.getText()).toString().trim();
+            String toAccountNumber = Objects.requireNonNull(binding.toAccountNumberInput.getText()).toString().trim();
+            if (input.isEmpty()) {
+                binding.amountInput.setError("Field cannot be empty");
+            } else if (toAccountNumber.isEmpty()){
+                binding.toAccountNumberInput.setError("To account Number is required");
+            } else {
+                try {
+                    double amount = Double.parseDouble(input);
+                    makeTransfer(accountType, amount, toAccountNumber);
+                    dialog.dismiss();
+                } catch (NumberFormatException e) {
+                    binding.amountInput.setError("Enter a valid amount");
+                }
+            }
+        });
+    }
+
+    private void makeTransfer(AccountType accountType, double amount, String toAccountNumber) {
+
     }
 }

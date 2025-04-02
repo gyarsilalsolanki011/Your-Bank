@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/depositDialog"
-    android:background="@color/dark_background"
-    android:layout_width="match_parent"
+    android:background="@drawable/bg_green_card"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="24dp">
@@ -41,9 +41,7 @@
             android:hint="@string/account_type"
             android:textColor="@color/white"
             android:textColorHint="@color/gray"
-            android:layout_height="wrap_content"
-            android:text="@string/select_account_type"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Account Number Input -->

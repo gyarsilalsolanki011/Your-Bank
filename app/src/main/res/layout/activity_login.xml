@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/bank_image"
+        android:src="@drawable/im_bank"
         android:layout_gravity="center"
         android:contentDescription="@string/image"
         android:layout_marginBottom="20dp"/>

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/withdrawDialog"
-    android:background="@color/dark_background"
-    android:layout_width="match_parent"
+    android:background="@drawable/bg_red_card"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="24dp">
@@ -36,14 +36,14 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/accountTypeInput"
+            android:focusable="true"
             android:inputType="textAutoComplete"
             android:layout_width="match_parent"
             android:hint="@string/account_type"
             android:textColor="@color/white"
             android:textColorHint="@color/gray"
             android:layout_height="wrap_content"
-            android:text="@string/select_account_type"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            android:clickable="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Account Number Input -->

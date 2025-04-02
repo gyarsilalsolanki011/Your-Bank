@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
-import com.gyarsilalsolanki011.bankingapp.databinding.CreatePasswordBinding;
+import com.gyarsilalsolanki011.bankingapp.databinding.LayCreatePasswordBinding;
 
 import java.util.Objects;
 
@@ -24,13 +24,13 @@ import retrofit2.Response;
 
 public class CreatePassword extends AppCompatActivity {
     private String email;
-    private CreatePasswordBinding binding;
+    private LayCreatePasswordBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = CreatePasswordBinding.inflate(getLayoutInflater());
+        binding = LayCreatePasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         email = getIntent().getStringExtra("email");

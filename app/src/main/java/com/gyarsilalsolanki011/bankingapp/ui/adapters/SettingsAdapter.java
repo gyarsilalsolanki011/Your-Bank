@@ -3,7 +3,6 @@ package com.gyarsilalsolanki011.bankingapp.ui.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -98,7 +97,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
     private void showLogoutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.logout_dialog, null);
+        View dialogView = inflater.inflate(R.layout.dialog_logout, null);
         builder.setView(dialogView);
 
         // Initialize Dialog Views

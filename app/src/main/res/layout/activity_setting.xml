@@ -24,14 +24,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:background="@drawable/solid_card_bg"
+        android:background="@drawable/bg_solid_card"
         android:gravity="center_vertical">
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_profile_image"
-            android:background="@drawable/profile_bg"
+            android:src="@drawable/im_profile_image"
+            android:background="@drawable/bg_profile"
             android:contentDescription="@string/image"/>
 
         <LinearLayout

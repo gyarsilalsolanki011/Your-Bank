@@ -97,7 +97,7 @@
                 android:id="@+id/facebook"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_facebook"
+                android:src="@drawable/im_facebook"
                 android:contentDescription="@string/image"
                 android:padding="8dp"/>
 
@@ -105,7 +105,7 @@
                 android:id="@+id/twitter"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_twitter"
+                android:src="@drawable/im_twitter"
                 android:contentDescription="@string/image"
                 android:padding="8dp"/>
 
@@ -113,7 +113,7 @@
                 android:id="@+id/linkedin"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_linkedin"
+                android:src="@drawable/im_linkedin"
                 android:contentDescription="@string/image"
                 android:padding="8dp"/>
 
@@ -121,7 +121,7 @@
                 android:id="@+id/whatsapp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_whatsapp"
+                android:src="@drawable/im_whatsapp"
                 android:contentDescription="@string/image"
                 android:padding="8dp"/>
 
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/type_your_message"
-            android:background="@drawable/input_field_bg"
+            android:background="@drawable/bg_input_field"
             android:inputType="text"
             android:textColor="#212121"
             android:textSize="16sp"

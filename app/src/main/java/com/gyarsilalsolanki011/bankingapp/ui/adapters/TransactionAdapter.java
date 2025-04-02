@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionStatus;
 import com.gyarsilalsolanki011.bankingapp.core.enums.TransactionType;
-import com.gyarsilalsolanki011.bankingapp.ui.models.AccountModel;
 import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
 
 import java.util.List;
@@ -53,15 +52,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         if (transaction.getTransactionStatus().equals(TransactionStatus.COMPLETED)){
             holder.tvStatus.setText("Success");
             holder.tvStatus.setTextColor(Color.GREEN);
-            holder.relativeLayout.setBackgroundResource(R.drawable.green_card_bg);
+            holder.relativeLayout.setBackgroundResource(R.drawable.bg_green_card);
         } else if (transaction.getTransactionStatus().equals(TransactionStatus.FAILED)){
             holder.tvStatus.setText("Failed");
             holder.tvStatus.setTextColor(Color.RED);
-            holder.relativeLayout.setBackgroundResource(R.drawable.red_card_bg);
+            holder.relativeLayout.setBackgroundResource(R.drawable.bg_red_card);
         } else {
             holder.tvStatus.setText("Pending");
             holder.tvStatus.setTextColor(Color.YELLOW);
-            holder.relativeLayout.setBackgroundResource(R.drawable.yellow_card_bg);
+            holder.relativeLayout.setBackgroundResource(R.drawable.bg_yellow_card);
         }
 
         // Change Icon Based on Transaction Type
