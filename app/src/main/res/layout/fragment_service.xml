@@ -1,8 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ServiceFragment">
+    android:background="@color/dark_background"
+    tools:context=".ui.fragments.ServiceFragment"
+    android:padding="20dp">
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/banking_services"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_services"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_bank_account"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/createAccountService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_service_deposit"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deposit_money_account"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/depositMoneyService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deposit_money"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_service_withdraw"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/withdraw_money_account"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/withdrawMoneyService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/withdraw_money"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_service_transfer"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer_money_account"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/transferMoneyService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer_money"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_service"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_your_profile"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/updateProfileService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_user"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Notification_service"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_your_notification"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/viewNotificationService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_notifications"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginVertical="8dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
