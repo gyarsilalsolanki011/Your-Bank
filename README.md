@@ -61,7 +61,7 @@ Call<LoginResponse> loginUser(
 git clone https://github.com/gyarsilalsolanki011/Your-Bank.git
 ```
 2️⃣ Open in Android Studio </br>
-3️⃣ Run on Emulator/Physical Device </br>
+3️⃣ Run on Emulator/Physical Device </br> </br>
 
 ## 📌 Setup API End Points with [Localhost: 8080](http://localhost:8080)
 1️⃣ Change Enviromenet Variable, add this directory to path variable
@@ -81,7 +81,7 @@ C:\User_Name\hp\AppData\Local\Android\sdk\platform-tools
 ```sh
 adb reverse tcp:8080 tcp:8080  
 ```
-You can also try other adb commands to check connection with localhost. </br>
+You can also try other adb commands to check connection with localhost. </br></br>
 
 ## 🚀 Future Enhancements
 - Dark Mode Support
