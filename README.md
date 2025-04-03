@@ -36,25 +36,52 @@ Your Bank is an Android banking application that provides seamless online and of
 ## 🔄 API Integration
 - Your Bank uses Retrofit to call backend APIs with JWT Authentication.
 ```sh
-@Headers("Content-Type: application/json")
-@POST("api/auth/login")
-Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+@POST("/api/auth/login")
+Call<LoginResponse> loginUser(
+   @Query("email") String email,
+   @Query("password") String password
+);
 ```
 - How to pass JWT Token?
 
 ```sh
-Request request = originalRequest.newBuilder()
-    .header("Authorization", "Bearer " + token)
-    .build();
+@POST("/api/accounts/create")
+    Call<StringResponse> createAccount(
+            @Query("email") String email,
+            @Query("accountType") String accountType,
+            @Query("balance") double balance,
+            @Header("Authorization") String token
+    );
 ```
+</br>
 
 ## 📥 Installation
 1️⃣ Clone the repository
 ```sh
 git clone https://github.com/gyarsilalsolanki011/Your-Bank.git
 ```
-2️⃣ Open in Android Studio
-3️⃣ Run on Emulator/Physical Device
+2️⃣ Open in Android Studio </br>
+3️⃣ Run on Emulator/Physical Device </br>
+
+## 📌 Setup API End Points with [Localhost: 8080](http://localhost:8080)
+1️⃣ Change Enviromenet Variable, add this directory to path variable
+```sh
+C:\User_Name\hp\AppData\Local\Android\sdk\platform-tools
+```
+2️⃣ Now add this attribute to androidManifest
+```sh
+<application
+        android:allowBackup="true"
+        .
+        .
+        . 
+        android:usesCleartextTraffic="true" >
+```
+3️⃣ Now reverse the port to 8080 using terminal
+```sh
+adb reverse tcp:8080 tcp:8080  
+```
+You can also try other adb commands to check connection with localhost. </br>
 
 ## 🚀 Future Enhancements
 - Dark Mode Support
@@ -65,11 +92,10 @@ git clone https://github.com/gyarsilalsolanki011/Your-Bank.git
 ## 📄 License
 This project is open-source. Feel free to use and modify it. 😊
 
-🔗 GitHub Repository: [Your Bank](https://github.com/gyarsilalsolanki011/Your-Bank.git)
-
 ## 📞 Contact
-For any queries, feel free to reach out:
- 📧 Email: gyarsilalsolanki011@gmail.com
- 🔗 LinkedIn: [Your Profile](https://linkedin.com/in/gyarsilalsolanki)
+For any queries, feel free to reach out: </br>
+📧 Email: gyarsilalsolanki011@gmail.com </br>
+🔗 LinkedIn: [Your Profile](https://linkedin.com/in/gyarsilalsolanki) </br>
+🔗 GitHub API Repository: [Banking-App](https://github.com/gyarsilalsolanki011/banking-app.git)
 
 Hope this README file meets your expectations! Let me know if you want any modifications. 🚀🔥
