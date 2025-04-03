@@ -6,12 +6,12 @@ A modern, feature-rich banking application for secure online and offline banking
 Your Bank is an Android banking application that provides seamless online and offline banking experiences for users and admins. Built with Java, XML, and Retrofit, it ensures secure transactions and efficient account management.
 
 ## 🛠️ Tech Stack
-- 🔹 **Languages**: Java, XML
-- 🔹 **Architecture**: MVVM (Model-View-ViewModel)
-- 🔹 **Database**: MySQL DB
-- 🔹 **Networking**: Retrofit, JWT Authentication
-- 🔹 **UI Components**: Material Design, ViewPager2, RecyclerView
-- 🔹 **Other Libraries**: Glide, Gson, DotsIndicator
+🔹 **Languages**: Java, XML
+🔹 **Architecture**: MVVM (Model-View-ViewModel)
+🔹 **Database**: MySQL DB
+🔹 **Networking**: Retrofit, JWT Authentication
+🔹 **UI Components**: Material Design, ViewPager2, RecyclerView
+🔹 **Other Libraries**: Glide, Gson, DotsIndicator
 
 ## 🎯 Features
 - 🌍 User Interface (Online Banking)
@@ -30,7 +30,7 @@ Your Bank is an Android banking application that provides seamless online and of
 - ✅ Offline Banking Support
 
 ## 📱 Screenshots
-- 🔹 User Dashboard
+🔹 User Dashboard
 (Coming Soon: Add UI screenshots here)
 
 ## 🔄 API Integration
@@ -57,10 +57,10 @@ git clone https://github.com/gyarsilalsolanki011/Your-Bank.git
 3️⃣ Run on Emulator/Physical Device
 
 ## 🚀 Future Enhancements
-- 🔹 Dark Mode Support
-- 🔹 AI-based Fraud Detection
-- 🔹 Loan & Investment Features
-- 🔹 Multi-language Support
+🔹 Dark Mode Support
+🔹 AI-based Fraud Detection
+🔹 Loan & Investment Features
+🔹 Multi-language Support
 
 ## 📄 License
 This project is open-source. Feel free to use and modify it. 😊
