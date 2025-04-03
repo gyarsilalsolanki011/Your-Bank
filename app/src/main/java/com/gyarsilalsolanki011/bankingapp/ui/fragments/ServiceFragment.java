@@ -1,6 +1,5 @@
 package com.gyarsilalsolanki011.bankingapp.ui.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,19 +8,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
-import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AccountApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.TransactionApiService;
@@ -41,12 +35,8 @@ import com.gyarsilalsolanki011.bankingapp.ui.activities.UpdateUserActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
 import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -75,11 +65,11 @@ public class ServiceFragment extends Fragment {
 
         binding.createAccountService.setOnClickListener(v -> showCreateAccountDialog());
 
-        binding.depositMoneyService.setOnClickListener(v -> showDepositMoneyDialog("952500083680", AccountType.SAVINGS));
+        binding.depositMoneyService.setOnClickListener(v -> showDepositMoneyDialog("952500066806", AccountType.SAVINGS));
 
-        binding.withdrawMoneyService.setOnClickListener(v -> showWithdrawMoneyDialog("952500083680", AccountType.SAVINGS));
+        binding.withdrawMoneyService.setOnClickListener(v -> showWithdrawMoneyDialog("952500066806", AccountType.SAVINGS));
 
-        binding.transferMoneyService.setOnClickListener(v -> showTransferMoneyDialog("952500083680", AccountType.SAVINGS));
+        binding.transferMoneyService.setOnClickListener(v -> showTransferMoneyDialog("952500066806", AccountType.SAVINGS));
 
         binding.updateProfileService.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), UpdateUserActivity.class);
@@ -155,6 +145,10 @@ public class ServiceFragment extends Fragment {
                     List<AccountType> accountTypes = UserSharedPreferencesManager.getInstance(getContext()).getUserAccounts();
                     accountTypes.add(0, AccountType.valueOf(accountType.toUpperCase()));
                     UserSharedPreferencesManager.getInstance(getContext()).setUserAccounts(accountTypes);
+                    AppSharedPreferenceManager.getInstance(getContext()).saveUserRegistered(false);
+                    sendNotification(new Date(),
+                            "Account Created",
+                            "Your "+accountType+" Account Created Successfully");
                 }
             }
 
@@ -211,7 +205,9 @@ public class ServiceFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(getContext(), "Your Deposit is success!", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction, response.body().getDate(), " Credited to");
+                    sendNotification(response.body().getDate(),
+                            "Transaction Successful",
+                            "₹"+transaction.getAmount()+" Credited from your account");
                     saveRecentTransaction(transaction);
                 }
             }
@@ -269,7 +265,9 @@ public class ServiceFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(getContext(), "Your Withdrawal is success!", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction, response.body().getDate(), " Debited from");
+                    sendNotification(response.body().getDate(),
+                            "Transaction Successful",
+                            "₹"+transaction.getAmount()+" Debited from your account");
                     saveRecentTransaction(transaction);
                 }
             }
@@ -331,7 +329,9 @@ public class ServiceFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     Toast.makeText(getContext(), "Your Transfer is success !", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
-                    sendNotification(transaction, response.body().getDate(), " Debited from");
+                    sendNotification(response.body().getDate(),
+                            "Transaction Successful",
+                            "₹"+transaction.getAmount()+" Debited from your account");
                     saveRecentTransaction(transaction);
                 }
             }
@@ -346,12 +346,9 @@ public class ServiceFragment extends Fragment {
     }
 
     // 🔹Save Transaction To sharedPreference
-    private void sendNotification(TransactionModel transaction, Date date, String type) {
+    private void sendNotification(Date date, String title, String message) {
         List<NotificationModel> notificationList = AppSharedPreferenceManager.getInstance(getContext()).getNotificationList();
-        notificationList.add(0, new NotificationModel(
-                "Transaction Successful",
-                "₹"+transaction.getAmount()+type+" your account",
-                 date));
+        notificationList.add(0, new NotificationModel(title, message, date));
         AppSharedPreferenceManager.getInstance(getContext()).saveNotificationList(notificationList);
     }
 

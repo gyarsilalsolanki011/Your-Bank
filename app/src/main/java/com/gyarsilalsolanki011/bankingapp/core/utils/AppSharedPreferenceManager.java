@@ -15,6 +15,10 @@ import java.util.List;
 public class AppSharedPreferenceManager {
     private static final String PREF_NAME = "AppPrefs";
     private static final String KEY_JWT_TOKEN = "JWT_TOKEN";
+    private static final String KEY_REGISTERED = "REGISTERED";
+    private static final String KEY_CURRENT = "CURRENT_ACCOUNT";
+    private static final String KEY_SAVINGS = "SAVINGS_ACCOUNT";
+    private static final String KEY_FIXED = "FIXED_DEPOSIT";
     private static final String KEY_NOTIFICATIONS = "NOTIFICATION_LIST";
     private static final String RECENT_TRANSACTION = "RECENT_TRANSACTION";
 
@@ -36,6 +40,17 @@ public class AppSharedPreferenceManager {
             instance = new AppSharedPreferenceManager(context);
         }
         return instance;
+    }
+
+    // 🔹 Save User Registered
+    public void saveUserRegistered(Boolean register) {
+        editor.putBoolean(KEY_REGISTERED, register);
+        editor.apply();
+    }
+
+    // 🔹 check User Registered
+    public boolean isUserRegistered(){
+        return sharedPreferences.getBoolean(KEY_REGISTERED, false);
     }
 
     // 🔹 Save JWT Token
@@ -62,20 +77,6 @@ public class AppSharedPreferenceManager {
         Type type = new TypeToken<List<NotificationModel>>() {}.getType();
         return json != null ? gson.fromJson(json, type) : new ArrayList<>();
     }
-
-    /*// 🔹 Save Transaction List
-    public void saveTransactionList(List<TransactionModel> transactions) {
-        String json = gson.toJson(transactions);
-        editor.putString(KEY_TRANSACTIONS, json);
-        editor.apply();
-    }
-
-    // 🔹 Retrieve Notification List
-    public List<TransactionModel> getTransactionList() {
-        String json = sharedPreferences.getString(KEY_TRANSACTIONS, null);
-        Type type = new TypeToken<List<TransactionModel>>() {}.getType();
-        return json != null ? gson.fromJson(json, type) : new ArrayList<>();
-    }*/
 
     // 🔹 Save Transaction List
     public void saveRecentTransactionList(List<TransactionModel> transactions) {

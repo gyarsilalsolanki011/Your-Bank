@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
+import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.databinding.LayCreatePasswordBinding;
 
 import java.util.Objects;
@@ -64,6 +65,7 @@ public class CreatePassword extends AppCompatActivity {
                         binding.createButton.setEnabled(true);
                         if (response.isSuccessful() && response.body() != null) {
                             String status = response.body().getStatus();
+                            saveUserRegistered();
                             Toast.makeText(CreatePassword.this, status, Toast.LENGTH_LONG).show();
                             startActivity(new Intent(CreatePassword.this, LoginActivity.class));
                             finish();
@@ -80,5 +82,9 @@ public class CreatePassword extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    private void saveUserRegistered() {
+        AppSharedPreferenceManager.getInstance(this).saveUserRegistered(true);
     }
 }

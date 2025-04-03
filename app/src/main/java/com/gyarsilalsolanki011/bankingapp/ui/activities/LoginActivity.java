@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         String token = response.body().getToken();
                         saveToken(token);
                         saveUserData(email);
-                        fetchAccountDetails(email);
+                        isUserRegistered(email);
                         startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
                         finish();
                     } else {
@@ -98,6 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
                 }
             });
+        }
+    }
+
+    private void isUserRegistered(String email) {
+        boolean userRegistered = AppSharedPreferenceManager.getInstance(this).isUserRegistered();
+        if (!userRegistered){
+            fetchAccountDetails(email);
         }
     }
 
