@@ -163,6 +163,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
                     Toast.makeText(context, "Money Withdrawal is success", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
                     sendNotification(transaction, response.body().getDate());
+                    saveRecentTransaction(transaction);
                 }
             }
 
@@ -223,6 +224,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
                     Toast.makeText(context, "Money Debited Successfully ", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
                     sendNotification(transaction, response.body().getDate());
+                    saveRecentTransaction(transaction);
                 }
             }
 
@@ -243,5 +245,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
                 "₹"+transaction.getAmount()+" Debited from your account",
                 date));
         AppSharedPreferenceManager.getInstance(context).saveNotificationList(notificationList);
+    }
+
+    private void saveRecentTransaction(TransactionModel transaction) {
+        List<TransactionModel> transactionList = AppSharedPreferenceManager.getInstance(context).getRecentTransactionList();
+        transactionList.add(0, transaction);
+        AppSharedPreferenceManager.getInstance(context).saveRecentTransactionList(transactionList);
     }
 }

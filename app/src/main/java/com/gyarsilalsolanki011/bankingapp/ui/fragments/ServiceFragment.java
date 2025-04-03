@@ -141,6 +141,7 @@ public class ServiceFragment extends Fragment {
                     Toast.makeText(getContext(), "Your Withdrawal is success!", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
                     sendNotification(transaction, response.body().getDate());
+                    saveRecentTransaction(transaction);
                 }
             }
 
@@ -202,6 +203,7 @@ public class ServiceFragment extends Fragment {
                     Toast.makeText(getContext(), "Your Transfer is success !", Toast.LENGTH_SHORT).show();
                     TransactionModel transaction = TransactionMapper.mapToTransactionModel(response.body());
                     sendNotification(transaction, response.body().getDate());
+                    saveRecentTransaction(transaction);
                 }
             }
 
@@ -214,7 +216,6 @@ public class ServiceFragment extends Fragment {
         });
     }
 
-
     // 🔹Save Transaction To sharedPreference
     private void sendNotification(TransactionModel transaction, Date date) {
         List<NotificationModel> notificationList = AppSharedPreferenceManager.getInstance(getContext()).getNotificationList();
@@ -223,5 +224,11 @@ public class ServiceFragment extends Fragment {
                 "₹"+transaction.getAmount()+" Debited from your account",
                  date));
         AppSharedPreferenceManager.getInstance(getContext()).saveNotificationList(notificationList);
+    }
+
+    private void saveRecentTransaction(TransactionModel transaction) {
+        List<TransactionModel> transactionList = AppSharedPreferenceManager.getInstance(getContext()).getRecentTransactionList();
+        transactionList.add(0, transaction);
+        AppSharedPreferenceManager.getInstance(getContext()).saveRecentTransactionList(transactionList);
     }
 }

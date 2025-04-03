@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
     // Load recent Transactions
     public void loadRecentTransactions() {
         // Transaction List From shared preference
-        List<TransactionModel> transactionList = AppSharedPreferenceManager.getInstance(getContext()).getTransactionList();
+        List<TransactionModel> transactionList = AppSharedPreferenceManager.getInstance(getContext()).getRecentTransactionList();
 
         // Set Adapter
         TransactionAdapter transactionAdapter = new TransactionAdapter(getContext(), transactionList);

@@ -16,7 +16,7 @@ public class AppSharedPreferenceManager {
     private static final String PREF_NAME = "AppPrefs";
     private static final String KEY_JWT_TOKEN = "JWT_TOKEN";
     private static final String KEY_NOTIFICATIONS = "NOTIFICATION_LIST";
-    private static final String KEY_TRANSACTIONS = "TRANSACTION_LIST";
+    private static final String RECENT_TRANSACTION = "RECENT_TRANSACTION";
 
     private static AppSharedPreferenceManager instance;
     private final SharedPreferences sharedPreferences;
@@ -63,7 +63,7 @@ public class AppSharedPreferenceManager {
         return json != null ? gson.fromJson(json, type) : new ArrayList<>();
     }
 
-    // 🔹 Save Transaction List
+    /*// 🔹 Save Transaction List
     public void saveTransactionList(List<TransactionModel> transactions) {
         String json = gson.toJson(transactions);
         editor.putString(KEY_TRANSACTIONS, json);
@@ -75,6 +75,20 @@ public class AppSharedPreferenceManager {
         String json = sharedPreferences.getString(KEY_TRANSACTIONS, null);
         Type type = new TypeToken<List<TransactionModel>>() {}.getType();
         return json != null ? gson.fromJson(json, type) : new ArrayList<>();
+    }*/
+
+    // 🔹 Save Transaction List
+    public void saveRecentTransactionList(List<TransactionModel> transactions) {
+        String json = gson.toJson(transactions);
+        editor.putString(RECENT_TRANSACTION, json);
+        editor.apply();
+    }
+
+    // 🔹 Retrieve Notification List
+    public List<TransactionModel> getRecentTransactionList() {
+        String json = sharedPreferences.getString(RECENT_TRANSACTION, null);
+        Type type = new TypeToken<List<TransactionModel>>() {}.getType();
+        return json != null ? gson.fromJson(json, type) : new ArrayList<>();
     }
 
     // 🔹 Clear JWT Token (Logout)
@@ -84,8 +98,8 @@ public class AppSharedPreferenceManager {
     }
 
     // 🔹 Clear Transactions
-    public void clearTransactions() {
-        editor.remove(KEY_TRANSACTIONS);
+    public void clearRecentTransactions() {
+        editor.remove(RECENT_TRANSACTION);
         editor.apply();
     }
 

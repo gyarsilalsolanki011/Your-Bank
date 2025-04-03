@@ -82,7 +82,7 @@ public class HistoryFragment extends Fragment {
                         .map(TransactionMapper::mapToTransactionModel)
                         .collect(Collectors.toList());
                 updateTransactionRecyclerView(transactionList);
-                saveTransactionList(transactionList);
+                /*saveTransactionList(transactionList);*/
             }
 
             @Override
@@ -102,7 +102,7 @@ public class HistoryFragment extends Fragment {
         }
     }
 
-    private void saveTransactionList(List<TransactionModel> transactionList) {
+    /*private void saveTransactionList(List<TransactionModel> transactionList) {
         AppSharedPreferenceManager.getInstance(getContext()).saveTransactionList(transactionList);
-    }
+    }*/
 }
