@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/createAccountDialog"
-    android:background="@color/dark_background"
+    android:background="@drawable/bg_green_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -45,10 +45,8 @@
             android:layout_width="match_parent"
             android:hint="@string/account_type"
             android:textColor="@color/white"
-            android:textColorHint="@color/gray"
-            android:layout_height="wrap_content"
-            android:text="@string/select_account_type"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            android:textColorHint="@color/blue"
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Amount Input -->

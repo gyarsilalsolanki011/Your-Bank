@@ -84,12 +84,11 @@ public class HomeFragment extends Fragment {
         snapHelper.attachToRecyclerView(allAccounts);
 
         // Load transaction data
-        if (!email.isEmpty()){
+        List<AccountType> accountTypeList = UserSharedPreferencesManager.getInstance(getContext()).getUserAccounts();
+        if (!accountTypeList.isEmpty() && !email.isEmpty()){
             loadRecentTransactions();
+            fetchAccountDetails();
         }
-
-        // Load Accounts
-        fetchAccountDetails();
 
         // set name from sharedPreference
         String userName = UserSharedPreferencesManager.getInstance(getContext()).getUserName();

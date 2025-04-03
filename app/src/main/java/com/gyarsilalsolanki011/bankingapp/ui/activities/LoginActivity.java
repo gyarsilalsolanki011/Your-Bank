@@ -1,7 +1,6 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,14 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.UserApiService;
-import com.gyarsilalsolanki011.bankingapp.core.enums.OnlineBankingStatus;
+import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+import com.gyarsilalsolanki011.bankingapp.core.models.AccountResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.LoginResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.UserResponse;
 import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
 import com.gyarsilalsolanki011.bankingapp.databinding.ActivityLoginBinding;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         String token = response.body().getToken();
                         saveToken(token);
                         saveUserData(email);
+                        fetchAccountDetails(email);
                         startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
                         finish();
                     } else {
@@ -131,7 +134,36 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    private void fetchAccountDetails(String email) {
+        String token = AppSharedPreferenceManager.getInstance(this).getJwtToken();
+
+        UserApiService userApiService = RetrofitClient.getInstance().getUserApiService();
+        Call<List<AccountResponse>> call = userApiService.getAllAccounts(email, token);
+
+        call.enqueue(new Callback<List<AccountResponse>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<AccountResponse>> call, @NonNull Response<List<AccountResponse>> response) {
+                assert response.body() != null;
+                List<AccountType> accountTypeList = response.body()
+                        .stream()
+                        .map(AccountResponse::getAccountType)
+                        .collect(Collectors.toList());
+                saveAccountTypeList(accountTypeList);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<AccountResponse>> call, @NonNull Throwable throwable) {
+                Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
+            }
+        });
+    }
+
     private void saveToken(String token) {
         AppSharedPreferenceManager.getInstance(this).saveJwtToken(token);
+    }
+
+    private void saveAccountTypeList(List<AccountType> accountTypeList) {
+        UserSharedPreferencesManager.getInstance(this).setUserAccounts(accountTypeList);
     }
 }

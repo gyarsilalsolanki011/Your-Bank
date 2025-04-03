@@ -79,9 +79,9 @@
     <string name="to_account_number">To Account Number</string>
     <string name="create_account">Create Account</string>
     <string name="select_account_type">Select Account Type</string>
-    <string name="savings_account">Savings Account</string>
-    <string name="current_account">Current Account</string>
-    <string name="fixed_deposit">Fixed Deposit</string>
+    <string name="savings_account">Savings</string>
+    <string name="current_account">Current</string>
+    <string name="fixed_deposit">Fixed_Deposit</string>
     <string name="account_services">Account Services (Savings, Current, Fixed Deposit)</string>
     <string name="banking_services">Banking Services</string>
     <string name="view_notifications">View Notifications</string>
