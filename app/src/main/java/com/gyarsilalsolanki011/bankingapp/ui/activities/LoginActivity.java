@@ -43,6 +43,15 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(v -> loginUser());
 
         binding.createAccountTextButton.setOnClickListener(v -> registerUser());
+
+        binding.forgotAccountTextButton.setOnClickListener(v -> recoverPassword());
+    }
+
+    // Forgot Password Intent
+    private void recoverPassword() {
+        Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     //Register User Navigation
@@ -109,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveUserData(String email) {
+        AppSharedPreferenceManager.getInstance(this).saveUserEmail(email);
         UserSharedPreferencesManager sharedPref = UserSharedPreferencesManager.getInstance(this);
 
         String token = AppSharedPreferenceManager.getInstance(this).getJwtToken();

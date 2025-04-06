@@ -19,6 +19,7 @@ public class AppSharedPreferenceManager {
     private static final String KEY_CURRENT = "CURRENT_ACCOUNT";
     private static final String KEY_SAVINGS = "SAVINGS_ACCOUNT";
     private static final String KEY_FIXED = "FIXED_DEPOSIT";
+    private static final String KEY_DEFAULT = "DEFAULT_ACCOUNT";
     private static final String KEY_NOTIFICATIONS = "NOTIFICATION_LIST";
     private static final String RECENT_TRANSACTION = "RECENT_TRANSACTION";
 
@@ -64,6 +65,46 @@ public class AppSharedPreferenceManager {
         return sharedPreferences.getString(KEY_JWT_TOKEN, null);
     }
 
+    // 🔹 Save Saving Account
+    public void saveSavingAccount(String accountNumber) {
+        editor.putString(KEY_SAVINGS, accountNumber);
+        editor.apply();
+    }
+
+    public String getSavingAccount(){
+        return sharedPreferences.getString(KEY_SAVINGS, null);
+    }
+
+    // 🔹 Save Current Account
+    public void saveCurrentAccount(String accountNumber) {
+        editor.putString(KEY_CURRENT, accountNumber);
+        editor.apply();
+    }
+
+    public String getCurrentAccount(){
+        return sharedPreferences.getString(KEY_CURRENT, null);
+    }
+
+    // 🔹 Save Fixed Deposit Account
+    public void saveFixedDepositAccount(String accountNumber) {
+        editor.putString(KEY_FIXED, accountNumber);
+        editor.apply();
+    }
+
+    public String getFixedDepositAccount(){
+        return sharedPreferences.getString(KEY_SAVINGS, null);
+    }
+
+    // 🔹 Save Default Account
+    public void saveDefaultAccount(String accountType) {
+        editor.putString(KEY_DEFAULT, accountType);
+        editor.apply();
+    }
+
+    public String getDefaultAccount(){
+        return sharedPreferences.getString(KEY_DEFAULT, null);
+    }
+
     // 🔹 Save Notification List
     public void saveNotificationList(List<NotificationModel> notifications) {
         String json = gson.toJson(notifications);
@@ -76,6 +117,15 @@ public class AppSharedPreferenceManager {
         String json = sharedPreferences.getString(KEY_NOTIFICATIONS, null);
         Type type = new TypeToken<List<NotificationModel>>() {}.getType();
         return json != null ? gson.fromJson(json, type) : new ArrayList<>();
+    }
+
+    public void saveUserEmail(String email) {
+        editor.putString("user_email", email);
+        editor.apply();
+    }
+
+    public String getUserEmail() {
+        return sharedPreferences.getString("user_email", "user@example.com");
     }
 
     // 🔹 Save Transaction List

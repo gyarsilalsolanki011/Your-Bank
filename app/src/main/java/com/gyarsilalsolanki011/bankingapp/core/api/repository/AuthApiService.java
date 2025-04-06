@@ -4,7 +4,9 @@ import com.gyarsilalsolanki011.bankingapp.core.models.LoginResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
 
 import retrofit2.Call;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface AuthApiService {
@@ -26,5 +28,11 @@ public interface AuthApiService {
     Call<StringResponse> cratePassword(
             @Query("email") String email,
             @Query("bankingPassword") String password
+    );
+
+    @PUT("/api/auth/recover-password")
+    Call<StringResponse> recoverPassword(
+            @Query("email") String email,
+            @Query("password") String password
     );
 }

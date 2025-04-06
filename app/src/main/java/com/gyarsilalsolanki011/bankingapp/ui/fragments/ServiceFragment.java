@@ -20,6 +20,7 @@ import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AccountApiService;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.TransactionApiService;
 import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+import com.gyarsilalsolanki011.bankingapp.core.models.AccountResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
 import com.gyarsilalsolanki011.bankingapp.core.models.TransactionResponse;
 import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
@@ -62,14 +63,40 @@ public class ServiceFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        AppSharedPreferenceManager sharedPref = AppSharedPreferenceManager.getInstance(getContext());
+        String accountNumber;
+        AccountType type;
 
         binding.createAccountService.setOnClickListener(v -> showCreateAccountDialog());
 
-        binding.depositMoneyService.setOnClickListener(v -> showDepositMoneyDialog("952500066806", AccountType.SAVINGS));
+        // Save accounts to App preference
+        List<AccountType> accountTypeList = UserSharedPreferencesManager.getInstance(getContext()).getUserAccounts();
+        for (AccountType accountType : accountTypeList){
+            saveAccountNumber(accountType);
+        }
 
-        binding.withdrawMoneyService.setOnClickListener(v -> showWithdrawMoneyDialog("952500066806", AccountType.SAVINGS));
+        if (!accountTypeList.isEmpty()){
+            String accountType = sharedPref.getDefaultAccount();
+            if (accountType.equals("SAVINGS_ACCOUNT")) {
+                accountNumber = sharedPref.getSavingAccount();
+                type = AccountType.SAVINGS;
+            } else if (accountType.equals("CURRENT_ACCOUNT")) {
+                accountNumber = sharedPref.getCurrentAccount();
+                type = AccountType.CURRENT;
+            } else {
+                accountNumber = sharedPref.getFixedDepositAccount();
+                type = AccountType.FIXED_DEPOSIT;
+            }
+        } else {
+            accountNumber = "952500013706";
+            type = AccountType.SAVINGS;
+        }
 
-        binding.transferMoneyService.setOnClickListener(v -> showTransferMoneyDialog("952500066806", AccountType.SAVINGS));
+        binding.depositMoneyService.setOnClickListener(v -> showDepositMoneyDialog(accountNumber, type));
+
+        binding.withdrawMoneyService.setOnClickListener(v -> showWithdrawMoneyDialog(accountNumber, type));
+
+        binding.transferMoneyService.setOnClickListener(v -> showTransferMoneyDialog(accountNumber, type));
 
         binding.updateProfileService.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), UpdateUserActivity.class);
@@ -356,5 +383,34 @@ public class ServiceFragment extends Fragment {
         List<TransactionModel> transactionList = AppSharedPreferenceManager.getInstance(getContext()).getRecentTransactionList();
         transactionList.add(0, transaction);
         AppSharedPreferenceManager.getInstance(getContext()).saveRecentTransactionList(transactionList);
+    }
+
+    private void saveAccountNumber(AccountType accountType) {
+        String email = UserSharedPreferencesManager.getInstance(getContext()).getUserEmail();
+        String token = AppSharedPreferenceManager.getInstance(getContext()).getJwtToken();
+
+        AccountApiService accountApiService = RetrofitClient.getInstance().getAccountApiService();
+        Call<AccountResponse> call = accountApiService.getAccount(email, accountType.toString(), token);
+
+        call.enqueue(new Callback<AccountResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<AccountResponse> call, @NonNull Response<AccountResponse> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    if (accountType.equals(AccountType.SAVINGS)){
+                        AppSharedPreferenceManager.getInstance(getContext()).saveSavingAccount(response.body().getAccountNumber());
+                    } else if (accountType.equals(AccountType.CURRENT)){
+                        AppSharedPreferenceManager.getInstance(getContext()).saveCurrentAccount(response.body().getAccountNumber());
+                    } else {
+                        AppSharedPreferenceManager.getInstance(getContext()).saveFixedDepositAccount(response.body().getAccountNumber());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AccountResponse> call, @NonNull Throwable throwable) {
+                Toast.makeText(getContext(), "Error: "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Network Error", Objects.requireNonNull(throwable.getMessage()));
+            }
+        });
     }
 }

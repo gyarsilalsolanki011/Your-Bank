@@ -96,4 +96,10 @@
     <string name="transfer_money_account">Transfer Money From Your Account</string>
     <string name="update_your_profile">Update Your Profile</string>
     <string name="view_your_notification">View Your Notifications</string>
+    <string name="recover_password">Recover Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="or">Or</string>
+    <string name="select_default_account">Select Default account</string>
+    <string name="fixed">Fixed Deposit</string>
+    <string name="set_account">Set Default Account</string>
 </resources>

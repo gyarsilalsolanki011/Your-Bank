@@ -5,19 +5,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.gyarsilalsolanki011.bankingapp.R;
+import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
+import com.gyarsilalsolanki011.bankingapp.core.api.repository.AccountApiService;
+import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
+import com.gyarsilalsolanki011.bankingapp.core.models.AccountResponse;
+import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.core.utils.TokenManager;
+import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
+import com.gyarsilalsolanki011.bankingapp.databinding.LayAccountSettingBinding;
+import com.gyarsilalsolanki011.bankingapp.ui.activities.ForgotPasswordActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.LoginActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.models.SettingsItem;
@@ -25,8 +38,11 @@ import com.gyarsilalsolanki011.bankingapp.ui.models.SettingsItem;
 import java.util.List;
 import java.util.Objects;
 
-public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder>{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder>{
     private final List<SettingsItem> settingsList;
     private final Context context;
 
@@ -51,13 +67,67 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         holder.description.setText(item.getDescription());
 
         holder.itemView.setOnClickListener(v -> {
-            if (item.getTitle().equals("Logout")) {
-                showLogoutDialog();
-            } else {
-                Intent intent = new Intent(context, NotificationActivity.class);
-                context.startActivity(intent);
+            switch (item.getTitle()) {
+                case "Logout":
+                    showLogoutDialog();
+                    break;
+                case "Security": {
+                    Intent intent = new Intent(context, ForgotPasswordActivity.class);
+                    context.startActivity(intent);
+                    break;
+                }
+                case "Account":
+                    setDefaultAccount();
+                    break;
+                case "Theme":
+                    Toast.makeText(context, "Default Theme activated", Toast.LENGTH_SHORT).show();
+                    break;
+                default: {
+                    Intent intent = new Intent(context, NotificationActivity.class);
+                    context.startActivity(intent);
+                    break;
+                }
             }
         });
+    }
+
+    private void setDefaultAccount() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.lay_account_setting, null);
+        builder.setView(dialogView);
+
+        // Create Dialog
+        AlertDialog dialog = builder.create();
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        MaterialButton setDefaultAccount = dialogView.findViewById(R.id.setDefaultAccount);
+
+        setDefaultAccount.setOnClickListener(v -> {
+            String accountType = selectYourField(dialogView);
+            Toast.makeText(context, "You have selected "+accountType, Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        });
+    }
+
+    private String selectYourField(View view) {
+        RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
+        MaterialButton setDefaultAccount = view.findViewById(R.id.setDefaultAccount);
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        setDefaultAccount.setVisibility(View.GONE);
+        RadioButton radioButton = view.findViewById(selectedId);
+        String accountType = radioButton.getText().toString();
+
+        if (accountType.equals("Savings")){
+            AppSharedPreferenceManager.getInstance(context).saveDefaultAccount("SAVINGS_ACCOUNT");
+        } else if (accountType.equals("Current")){
+            AppSharedPreferenceManager.getInstance(context).saveDefaultAccount("CURRENT_ACCOUNT");
+        } else {
+            AppSharedPreferenceManager.getInstance(context).saveDefaultAccount("FIXED_DEPOSIT");
+        }
+        return accountType;
     }
 
     @Override
