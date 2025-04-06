@@ -1,16 +1,21 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.gyarsilalsolanki011.bankingapp.R;
 import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
 import com.gyarsilalsolanki011.bankingapp.core.api.repository.AuthApiService;
 import com.gyarsilalsolanki011.bankingapp.core.models.StringResponse;
@@ -33,10 +38,30 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         binding = ActivityForgotPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Initialize Toolbar
+        setSupportActionBar(binding.toolbar);
+
+        // Enable Back Button
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Drawable navIcon = binding.toolbar.getNavigationIcon();
+        if (navIcon != null) {
+            navIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
+        getSupportActionBar().setTitle("Password recovery");
+
         String email = AppSharedPreferenceManager.getInstance(this).getUserEmail();
 
         binding.emailInput.setText(email);
         binding.recoverButton.setOnClickListener(v -> recoverPassword(email));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) { // Handle back button
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void recoverPassword(String email) {
