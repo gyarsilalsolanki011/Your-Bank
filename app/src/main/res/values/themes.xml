@@ -9,8 +9,6 @@
     <style name="Theme.YourBank" parent="Base.Theme.YourBank" />
     <style name="Theme.Activity" parent="Theme.YourBank">
         <item name="android:background">@drawable/bg_activity</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
     </style>
     
     <style name="Theme.SearchView" parent="Theme.YourBank">

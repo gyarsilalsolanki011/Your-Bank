@@ -78,7 +78,11 @@ public class ContactUsActivity extends AppCompatActivity {
         // Send Message to whatsapp
         binding.sendMessage.setOnClickListener(v -> {
             if (binding.messageInput.getText().toString().trim().isEmpty()){
-                Toast.makeText(this, "Please Enter the message.", Toast.LENGTH_SHORT).show();
+                binding.messageInput.setError("Please Enter The message");
+            } else {
+                String uriText = "https://api.whatsapp.com/send/"+"?phone="+"7620824421"+"&text="+
+                        convertToUrlFormat(binding.messageInput.getText().toString().trim())+"&type=phone_number&app_absent=0";
+                openLink(uriText);
             }
         });
     }
