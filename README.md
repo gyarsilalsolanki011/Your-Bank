@@ -30,8 +30,12 @@ Your Bank is an Android banking application that provides seamless online and of
 - ✅ Offline Banking Support
 
 ## 📱 Screenshots
-🔹 User Dashboard
-(Coming Soon: Add UI screenshots here)
+🔹 User Dashbord and Navigation Item activities
+![Your Bank Images](https://github.com/user-attachments/assets/4d4ea1dc-774b-48f2-8fca-0b8d8369e15f)
+
+![Your Bank ImagesI](https://github.com/user-attachments/assets/2ed3ecf8-1679-4ffc-aee5-3c4524e19fc9)
+
+
 
 ## 🔄 API Integration
 - Your Bank uses Retrofit to call backend APIs with JWT Authentication.
