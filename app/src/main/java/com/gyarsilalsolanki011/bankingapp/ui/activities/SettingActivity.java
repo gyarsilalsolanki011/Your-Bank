@@ -48,7 +48,7 @@ public class SettingActivity extends AppCompatActivity {
 
         // Hard Coded Data
         List<SettingsItem> settingsList = new ArrayList<>();
-        settingsList.add(new SettingsItem(R.drawable.ic_profile, "Account", "Manage your account settings"));
+        settingsList.add(new SettingsItem(R.drawable.ic_profile, "Account", "Select a default account for Transaction"));
         settingsList.add(new SettingsItem(R.drawable.ic_security, "Security", "Change password and manage security settings"));
         settingsList.add(new SettingsItem(R.drawable.ic_notifications, "Notifications", "Customize your notification preferences"));
         settingsList.add(new SettingsItem(R.drawable.ic_theme, "Theme", "Switch between light and dark mode"));

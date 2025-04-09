@@ -69,13 +69,13 @@ public class UserDashboardActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
-                loadFragments(new HomeFragment(), "HOME_FRAGMENT");
+                loadFragments(new HomeFragment());
             } else if (id == R.id.nav_services) {
-                loadFragments(new ServiceFragment(), "SERVICE_FRAGMENT");
+                loadFragments(new ServiceFragment());
             } else if (id == R.id.nav_history) {
-                loadFragments(new HistoryFragment(), "HISTORY_FRAGMENT");
+                loadFragments(new HistoryFragment());
             } else if (id == R.id.nav_profile) {
-                loadFragments(new ProfileFragment(), "PROFILE_FRAGMENT");
+                loadFragments(new ProfileFragment());
             }
             return true;
         });
@@ -106,9 +106,9 @@ public class UserDashboardActivity extends AppCompatActivity {
         return super.getOnBackInvokedDispatcher();
     }
 
-    public void loadFragments(Fragment fragment, String tag){
+    public void loadFragments(Fragment fragment){
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, fragment, tag)
+                .replace(R.id.fragment_container, fragment)
                 .commit();
     }
 

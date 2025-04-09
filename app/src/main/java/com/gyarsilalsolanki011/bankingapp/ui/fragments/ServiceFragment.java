@@ -1,10 +1,13 @@
 package com.gyarsilalsolanki011.bankingapp.ui.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -32,6 +35,8 @@ import com.gyarsilalsolanki011.bankingapp.databinding.DialogWithdrawBinding;
 import com.gyarsilalsolanki011.bankingapp.databinding.FragmentServiceBinding;
 import com.gyarsilalsolanki011.bankingapp.ui.Mappers.TransactionMapper;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
+import com.gyarsilalsolanki011.bankingapp.ui.activities.QrScannerActivity;
+import com.gyarsilalsolanki011.bankingapp.ui.activities.SettingActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.UpdateUserActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.models.NotificationModel;
 import com.gyarsilalsolanki011.bankingapp.ui.models.TransactionModel;
@@ -46,6 +51,7 @@ import retrofit2.Response;
 
 public class ServiceFragment extends Fragment {
     private FragmentServiceBinding binding;
+    private ActivityResultLauncher<Intent> qrScannerLauncher;
 
     public ServiceFragment() {
         // Required empty public constructor
@@ -92,11 +98,23 @@ public class ServiceFragment extends Fragment {
             type = AccountType.SAVINGS;
         }
 
+        qrScannerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        String scannedAccountNumber = result.getData().getStringExtra("accountNumber");
+                        Toast.makeText(getContext(), "Scanned Account: " + scannedAccountNumber, Toast.LENGTH_SHORT).show();
+
+                        showTransferMoneyDialog(accountNumber, type, scannedAccountNumber);
+                    }
+                }
+        );
+
         binding.depositMoneyService.setOnClickListener(v -> showDepositMoneyDialog(accountNumber, type));
 
         binding.withdrawMoneyService.setOnClickListener(v -> showWithdrawMoneyDialog(accountNumber, type));
 
-        binding.transferMoneyService.setOnClickListener(v -> showTransferMoneyDialog(accountNumber, type));
+        binding.transferMoneyService.setOnClickListener(v -> showTransferMoneyDialog(accountNumber, type, null));
 
         binding.updateProfileService.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), UpdateUserActivity.class);
@@ -108,6 +126,10 @@ public class ServiceFragment extends Fragment {
             startActivity(intent);
         });
 
+        binding.qrScannerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), QrScannerActivity.class);
+            qrScannerLauncher.launch(intent);
+        });
     }
 
     // 🔹create account Dialog
@@ -176,6 +198,9 @@ public class ServiceFragment extends Fragment {
                     sendNotification(new Date(),
                             "Account Created",
                             "Your "+accountType+" Account Created Successfully");
+                    Intent intent = new Intent(getContext(), SettingActivity.class);
+                    Toast.makeText(getContext(), "Please select Default account", Toast.LENGTH_LONG).show();
+                    startActivity(intent);
                 }
             }
 
@@ -309,7 +334,7 @@ public class ServiceFragment extends Fragment {
 
 
     // 🔹Transfer Money Dialog
-    private void showTransferMoneyDialog(String accountNumber, AccountType accountType) {
+    private void showTransferMoneyDialog(String accountNumber, AccountType accountType, @Nullable String scannedAccountNumber) {
         DialogTransferBinding binding = DialogTransferBinding.inflate(LayoutInflater.from(getContext()));
 
         // Create Dialog
@@ -322,6 +347,9 @@ public class ServiceFragment extends Fragment {
         // Set Text
         binding.accountTypeInput.setText(accountType.toString());
         binding.accountNumberInput.setText(accountNumber);
+        if (scannedAccountNumber != null){
+            binding.toAccountNumberInput.setText(scannedAccountNumber);
+        }
 
         // Handle Transfer Button Click
         binding.transferButton.setOnClickListener(v -> {

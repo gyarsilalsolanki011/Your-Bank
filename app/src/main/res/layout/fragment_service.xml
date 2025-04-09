@@ -222,6 +222,32 @@
             android:background="@color/gray"
             android:layout_marginVertical="8dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qr_scanner"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_and_pay"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/qrScannerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_qr_code"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
     </LinearLayout>
 
 </ScrollView>

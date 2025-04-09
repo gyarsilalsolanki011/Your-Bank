@@ -47,7 +47,6 @@ public class ProfileFragment extends Fragment {
         userAccounts = view.findViewById(R.id.userAccounts);
         userAddress = view.findViewById(R.id.userAddress);
         Button btnEditProfile = view.findViewById(R.id.btnEditProfile);
-        ImageView profileImage = view.findViewById(R.id.profileImage);
 
         // Load User Data from SharedPreferences or API
         loadUserData();

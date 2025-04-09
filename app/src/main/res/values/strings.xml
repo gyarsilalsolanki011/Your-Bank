@@ -102,4 +102,8 @@
     <string name="select_default_account">Select Default account</string>
     <string name="fixed">Fixed Deposit</string>
     <string name="set_account">Set Default Account</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="qr_scanner">Qr Scanner(QR Pay)</string>
+    <string name="scan_and_pay">Scan QR code and Pay</string>
+    <string name="scan_qr_code">Scan QR code</string>
 </resources>

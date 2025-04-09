@@ -56,6 +56,14 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     // Gson Converter dependency
-    implementation("com.google.code.gson:gson:2.8.9")
+    implementation(libs.gson)
+
+    // MLKit Barcode Scanning
+    implementation (libs.barcode.scanning)
+
+    // Qr Code Scanner Dependency
+    implementation (libs.camera.camera2)
+    implementation (libs.camera.lifecycle)
+    implementation (libs.camera.view)
 
 }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.gyarsilalsolanki011.bankingapp.R;
-import com.gyarsilalsolanki011.bankingapp.core.api.RetrofitClient;
-import com.gyarsilalsolanki011.bankingapp.core.api.repository.AccountApiService;
-import com.gyarsilalsolanki011.bankingapp.core.enums.AccountType;
-import com.gyarsilalsolanki011.bankingapp.core.models.AccountResponse;
 import com.gyarsilalsolanki011.bankingapp.core.utils.AppSharedPreferenceManager;
 import com.gyarsilalsolanki011.bankingapp.core.utils.TokenManager;
-import com.gyarsilalsolanki011.bankingapp.core.utils.UserSharedPreferencesManager;
-import com.gyarsilalsolanki011.bankingapp.databinding.LayAccountSettingBinding;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.ForgotPasswordActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.LoginActivity;
 import com.gyarsilalsolanki011.bankingapp.ui.activities.NotificationActivity;
@@ -37,10 +30,6 @@ import com.gyarsilalsolanki011.bankingapp.ui.models.SettingsItem;
 
 import java.util.List;
 import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder>{
     private final List<SettingsItem> settingsList;
