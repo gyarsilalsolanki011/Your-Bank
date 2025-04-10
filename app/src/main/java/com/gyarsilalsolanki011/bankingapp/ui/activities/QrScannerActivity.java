@@ -1,7 +1,10 @@
 package com.gyarsilalsolanki011.bankingapp.ui.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -11,6 +14,7 @@ import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -26,6 +30,7 @@ import java.util.concurrent.Executors;
 
 public class QrScannerActivity extends AppCompatActivity {
 
+    private static final int CAMERA_PERMISSION_CODE = 101;
     private ActivityQrScannerBinding binding;
     private BarcodeScanner scanner;
     private boolean isFlashOn = false;
@@ -37,6 +42,13 @@ public class QrScannerActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityQrScannerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_CODE);
+        }
 
         scanner = BarcodeScanning.getClient();
 

@@ -12,14 +12,16 @@ public class TransactionResponse {
     private final Double amount;
     private final Date date;
     private final TransactionStatus transactionStatus;
+    private final Double avlBalance;
 
-    public TransactionResponse(Long transactionId, String accountNumber, TransactionType transactionType, Double amount, Date date, TransactionStatus transactionStatus) {
+    public TransactionResponse(Long transactionId, String accountNumber, TransactionType transactionType, Double amount, Date date, TransactionStatus transactionStatus, Double avlBalance) {
         this.transactionId = transactionId;
         this.accountNumber = accountNumber;
         this.transactionType = transactionType;
         this.amount = amount;
         this.date = date;
         this.transactionStatus = transactionStatus;
+        this.avlBalance = avlBalance;
     }
 
     public Long getTransactionId() {
@@ -45,5 +47,9 @@ public class TransactionResponse {
 
     public TransactionStatus getTransactionStatus() {
         return transactionStatus;
+    }
+
+    public Double getAvlBalance() {
+        return avlBalance;
     }
 }
